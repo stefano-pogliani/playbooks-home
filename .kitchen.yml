@@ -1,0 +1,41 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+
+platforms:
+  - name: fedora-26
+
+
+provisioner:
+  name: ansible_playbook
+  require_ansible_repo: true
+  require_ansible_omnibus: false
+  ansible_version: 'latest'
+
+  ansible_verbose: true
+  require_chef_for_busser: false
+
+  requirements_path: 'requirements.yml'
+  hosts: ['localhost']
+
+
+verifier:
+  name: serverspec
+  use_sudo: false
+  #sudo_path: true
+
+suites:
+  - name: task
+    provisioner:
+      playbook: 'tests/task.yml'
+      additional_copy_path: ['tasks']
+      extra_vars:
+        task_to_test: 'runtime/nodejs.yml'
+
+  - name: playbook
+    provisioner:
+      playbook: 'playbooks/authgateway.yml'
+      extra_vars:
+        upstream_nginx_service_manage: false

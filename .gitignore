@@ -1,1 +1,9 @@
+*.swp
 ansible.log
+
+.bundle/
+.kitchen/
+.vendor/
+bin/
+
+roles/*
