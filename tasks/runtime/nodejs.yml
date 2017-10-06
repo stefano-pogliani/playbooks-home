@@ -1,0 +1,22 @@
+---
+- name: NodeJS official repo key
+  copy:
+    dest: '/etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL'
+    src: 'tasks/runtime/NODESOURCE-GPG-SIGNING-KEY-EL'
+    mode: 0644
+
+- name: NodeJS official repo
+  yum_repository:
+    baseurl: 'https://rpm.nodesource.com/pub_8.x/fc/$releasever/$basearch'
+    description: 'Node.js Packages for Fedora Linux $releasever - $basearch'
+    enabled: true
+    failovermethod: 'priority'
+    gpgcheck: true
+    gpgkey: '/etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL'
+    name: 'nodesource'
+    state: present
+
+- name: Install NodeJS and build packages
+  package:
+    name: 'nodejs'
+    state: present
