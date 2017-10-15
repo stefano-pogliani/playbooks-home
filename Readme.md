@@ -29,3 +29,15 @@ configurations can be tweaked to test specific things.
 bundle install --path=.vendor --binstubs
 ./bin/kitchen test
 ```
+
+### OS Upgrades
+Prior to upgading the OS on the server test that all tasks and
+playbooks work with the new target OS.
+
+### Tasks
+
+  * `runtime/nodejs.yml`
+
+### Playbooks
+
+  * `authgateway.yml`

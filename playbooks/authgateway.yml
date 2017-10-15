@@ -1,0 +1,17 @@
+---
+# AuthGateway prerequisites first.
+- hosts: lon01-cloud
+  roles:
+    - role: stefano-pogliani.upstream-nginx
+
+- hosts: lon01-cloud
+  tasks:
+    - import_tasks: tasks/runtime/nodejs.yml
+    # TODO(stefano): install and configure acmetool
+    # TODO(stefano): install and configure authgateway auditor.
+
+
+# Finally install and configure AuthGateway.
+- hosts: lon01-cloud
+  roles:
+    - role: stefano-pogliani.authgateway
