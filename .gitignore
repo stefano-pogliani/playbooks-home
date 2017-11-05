@@ -1,4 +1,5 @@
 *.swp
+*.vaultsecret
 ansible.log
 
 .bundle/

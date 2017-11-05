@@ -14,8 +14,22 @@ provisioner:
   require_ansible_omnibus: false
   ansible_version: 'latest'
 
+  ansible_diff: true
   ansible_verbose: true
   require_chef_for_busser: false
+
+  ansible_inventory: 'tests/inventory'
+  additional_copy_path:
+    - 'ansible/host_vars'
+    - 'tasks'
+
+  # Ansible fails if it can't decoded secrets.
+  # Passing different secrets for prod/test and managing
+  # the test secret is a pain so just delete the vaults.
+  custom_pre_play_command: |
+    echo 'Deleting vault files ...'
+    rm -v /tmp/kitchen/host_vars/m910q/authgateway
+    echo 'Done deleting vaults'
 
   requirements_path: 'requirements.yml'
   hosts: ['localhost']
@@ -30,7 +44,6 @@ suites:
   - name: task
     provisioner:
       playbook: 'tests/task.yml'
-      additional_copy_path: ['tasks']
       extra_vars:
         task_to_test: 'runtime/nodejs.yml'
 
@@ -39,3 +52,6 @@ suites:
       playbook: 'playbooks/authgateway.yml'
       extra_vars:
         upstream_nginx_service_manage: false
+        vault_authgateway_client_id: 'abc'
+        vault_authgateway_client_secret: 'def'
+        vault_authgateway_session_secret: 'egh'
