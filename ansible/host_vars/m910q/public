@@ -18,8 +18,7 @@ authgateway_conf_client_id: '{{ vault_authgateway_client_id }}'
 authgateway_conf_client_secret: '{{ vault_authgateway_client_secret }}'
 authgateway_conf_session_secret: '{{ vault_authgateway_session_secret }}'
 
-authgateway_extra_emails:
-  - 'spogliani@gmail.com'
+authgateway_extra_emails: '{{ vault_authgateway_allowed_emails | to_yaml }}'
 
 authgateway_conf_apps:
   - name: Wekan

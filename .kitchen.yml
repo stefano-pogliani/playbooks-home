@@ -61,3 +61,4 @@ suites:
         vault_authgateway_client_id: 'abc'
         vault_authgateway_client_secret: 'def'
         vault_authgateway_session_secret: 'egh'
+        vault_authgateway_allowed_emails: ['test@example.com']
