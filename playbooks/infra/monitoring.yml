@@ -1,9 +1,9 @@
 ---
 - hosts: m910q
   tasks:
-    - import_tasks: '../../tasks/infra/prometheus/server/main.yml'
-    - import_tasks: '../../tasks/infra/prometheus/node/main.yml'
-    - import_tasks: '../../tasks/infra/grafana/main.yml'
+    - import_tasks: '../../tasks/infra/monitoring/prometheus/server/main.yml'
+    - import_tasks: '../../tasks/infra/monitoring/prometheus/node/main.yml'
+    - import_tasks: '../../tasks/infra/monitoring/grafana/main.yml'
 
   handlers:
     - name: Restart Prometheus
