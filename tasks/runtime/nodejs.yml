@@ -1,11 +1,11 @@
 ---
-- name: NodeJS official repo key
+- name: NodeJS | Official repo key
   copy:
     dest: '/etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL'
-    src: 'tasks/runtime/file/NODESOURCE-GPG-SIGNING-KEY-EL'
+    src: 'NODESOURCE-GPG-SIGNING-KEY-EL'
     mode: 0644
 
-- name: NodeJS official repo
+- name: NodeJS | Official repo
   yum_repository:
     baseurl: 'https://rpm.nodesource.com/pub_8.x/fc/$releasever/$basearch'
     description: 'Node.js Packages for Fedora Linux $releasever - $basearch'
@@ -16,7 +16,7 @@
     name: 'nodesource'
     state: present
 
-- name: Install build packages
+- name: NodeJS | Install build packages
   package:
     name: '{{ item }}'
     state: present
@@ -24,7 +24,7 @@
     - 'gcc-c++'
     - 'make'
 
-- name: Install NodeJS
+- name: NodeJS | Install NodeJS
   package:
     name: 'nodejs'
     state: present

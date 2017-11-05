@@ -21,6 +21,7 @@ provisioner:
   ansible_inventory: 'tests/inventory'
   additional_copy_path:
     - 'ansible/host_vars'
+    - 'playbooks'
     - 'tasks'
 
   # Ansible fails if it can't decoded secrets.
@@ -45,12 +46,17 @@ suites:
     provisioner:
       playbook: 'tests/task.yml'
       extra_vars:
+        #task_to_test: 'infra/prometheus/server/main.yml'
         task_to_test: 'runtime/nodejs.yml'
 
-  - name: playbook
+  - name: play
     provisioner:
-      playbook: 'playbooks/authgateway.yml'
+      playbook: 'tests/play.yml'
       extra_vars:
+        #playbook_to_test: 'playbooks/infra/authgateway.yml'
+        playbook_to_test: 'playbooks/infra/monitoring.yml'
+
+        # AuthGateway extra vars.
         upstream_nginx_service_manage: false
         vault_authgateway_client_id: 'abc'
         vault_authgateway_client_secret: 'def'

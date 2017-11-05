@@ -1,0 +1,25 @@
+---
+- name: Prometheus | Create group
+  group:
+    name:  'prometheus'
+    state:  present
+    system: yes
+
+- name: Prometheus | Create user
+  user:
+    createhome: no
+    group: 'prometheus'
+    name:  'prometheus'
+    shell: '/bin/false'
+    state:  present
+    system: yes
+
+- name: Prometheus | Create install directories
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+  with_items:
+    - '/opt/prometheus'
+    - '/opt/prometheus/archives'
+    - '/opt/prometheus/bin'

@@ -16,6 +16,9 @@ ansible PATTERN --ask-become-pass --become ...
 
 # Call ansible playbook.
 ansible-playbook playbooks/some/playbook.yml
+ansible-playbook --ask-become-pass \
+  --vault-id authgateway@.authgateway.vaultsecret \
+  playbooks/infra/monitoring.yml
 ```
 
 

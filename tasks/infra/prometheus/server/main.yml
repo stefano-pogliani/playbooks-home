@@ -1,0 +1,12 @@
+---
+- name: Prometheus Server | Common
+  import_tasks: '../common.yml'
+
+- name: Prometheus Server | Install
+  import_tasks: 'install.yml'
+
+- name: Prometheus Server | Configure
+  import_tasks: 'config.yml'
+
+- name: Prometheus Server | Service
+  import_tasks: 'service.yml'

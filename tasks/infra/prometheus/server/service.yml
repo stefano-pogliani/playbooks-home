@@ -1,0 +1,17 @@
+---
+- name: Prometheus Server | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/prometheus.service'
+    src:   'prometheus.service'
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode:   0644
+  notify:
+    - Restart Prometheus
+
+- name: Prometheus Server | Configure Service
+  service:
+    enabled: yes
+    name: prometheus
+    state: started
+  when: 'not("/.dockerenv"|exists)'

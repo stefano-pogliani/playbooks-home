@@ -1,0 +1,39 @@
+---
+- name: Prometheus Server | Create data directory
+  file:
+    path: '/data/prometheus'
+    state: directory
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode: 0755
+
+- name: Prometheus Server | Fetch archive
+  get_url:
+    url: 'https://github.com/prometheus/prometheus/releases/download/v2.0.0-rc.3/prometheus-2.0.0-rc.3.linux-amd64.tar.gz'
+    dest: '/opt/prometheus/archives/prometheus-2.0.0-rc.3.linux-amd64.tar.gz'
+    checksum: 'sha256:f5f5687ffbe3fbf1d38fab88010cbb5f31b387feb3028dc7f7765cacd012cb35'
+    mode: 0644
+
+- name: Prometheus Server | Extract the release
+  unarchive:
+    remote_src: yes
+    dest: '/opt/prometheus/bin'
+    src: '/opt/prometheus/archives/prometheus-2.0.0-rc.3.linux-amd64.tar.gz'
+
+- name: Prometheus Server | Activate the current version
+  file:
+    path: '/opt/prometheus/bin/prometheus'
+    src: '/opt/prometheus/bin/prometheus-2.0.0-rc.3.linux-amd64/prometheus'
+    state: link
+  notify:
+    - Restart Prometheus
+
+- name: Prometheus Server | Render run script
+  copy:
+    dest: '/opt/prometheus/bin/run-server'
+    src:  'run-server'
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode:  0755
+  notify:
+    - Restart Prometheus

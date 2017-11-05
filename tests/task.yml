@@ -3,3 +3,7 @@
   remote_user: root
   tasks:
     - include_tasks: 'tasks/{{ task_to_test }}'
+  handlers:
+    - name: Restart Prometheus
+      debug:
+        msg: 'Simulate service restart'

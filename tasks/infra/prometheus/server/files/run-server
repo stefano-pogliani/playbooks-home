@@ -1,0 +1,9 @@
+#!/bin/bash
+#  Wrapper script to start prometheus.
+#  Used to easily pass all the arguments to the command line.
+/opt/prometheus/bin/prometheus \
+  --config.file=/opt/prometheus/config.yml \
+  --log.level=info \
+  --storage.tsdb.path=/data/prometheus \
+  --storage.tsdb.retention=365d \
+  --web.listen-address="127.0.0.1:9090"

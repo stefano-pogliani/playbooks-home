@@ -1,0 +1,10 @@
+---
+- name: Prometheus Server | Render config file
+  template:
+    dest:  '/opt/prometheus/config.yml'
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode:  0644
+    src:   'config.yml'
+  notify:
+    - Restart Prometheus
