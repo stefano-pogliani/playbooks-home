@@ -1,0 +1,9 @@
+---
+- name: Grafana | Install
+  import_tasks: 'install.yml'
+
+- name: Grafana | Configure
+  import_tasks: 'config.yml'
+
+- name: Grafana | Service
+  import_tasks: 'service.yml'

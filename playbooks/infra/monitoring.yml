@@ -3,7 +3,7 @@
   tasks:
     - import_tasks: '../../tasks/infra/prometheus/server/main.yml'
     - import_tasks: '../../tasks/infra/prometheus/node/main.yml'
-    # TODO(stefano): grafana
+    - import_tasks: '../../tasks/infra/grafana/main.yml'
 
   handlers:
     - name: Restart Prometheus
@@ -15,5 +15,11 @@
     - name: Restart Prometheus Node Exporter
       service:
         name: prometheus-node-exporter
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'
+
+    - name: Restart Grafana
+      service:
+        name: grafana-server
         state: restarted
       when: 'not("/.dockerenv"|exists)'

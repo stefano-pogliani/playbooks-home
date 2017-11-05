@@ -1,0 +1,20 @@
+---
+- name: Grafana | Configure Repo
+  yum_repository:
+    baseurl: 'https://packagecloud.io/grafana/stable/el/7/$basearch'
+    description: grafana
+    enabled: yes
+    file: grafana
+    gpgcheck: yes
+    gpgkey: 'https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana'
+    name: grafana
+    repo_gpgcheck: yes
+    sslcacert: '/etc/pki/tls/certs/ca-bundle.crt'
+    sslverify: yes
+
+- name: Grafana | Install package
+  dnf:
+    name: grafana
+    state: present
+  notify:
+    - Restart Grafana

@@ -30,6 +30,7 @@ provisioner:
   custom_pre_play_command: |
     echo 'Deleting vault files ...'
     rm -v /tmp/kitchen/host_vars/m910q/authgateway
+    rm -v /tmp/kitchen/host_vars/m910q/grafana
     echo 'Done deleting vaults'
 
   requirements_path: 'requirements.yml'
@@ -55,6 +56,9 @@ suites:
       extra_vars:
         #playbook_to_test: 'playbooks/infra/authgateway.yml'
         playbook_to_test: 'playbooks/infra/monitoring.yml'
+        vault_grafana_admin_user: admin
+        vault_grafana_admin_password: admin
+        vault_grafana_secret_key: 1234
 
         # AuthGateway extra vars.
         upstream_nginx_service_manage: false

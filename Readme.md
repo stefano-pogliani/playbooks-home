@@ -30,10 +30,13 @@ The master password was generated as below and is git ignored.
 The following is a list of vaults:
 
   * `authgateway`: secrets used to configure AuthGateway.
+  * `grafana`: secrets used to configure Grafana.
 
 ```bash
 openssl rand -base64 4096 | tr -d '\n' > .authgateway.vaultsecret
-# Generate a secret for AuthGateway sessions.
+openssl rand -base64 4096 | tr -d '\n' > .grafana.vaultsecret
+
+# Generate random secrets.
 openssl rand -base64 48
 ```
 

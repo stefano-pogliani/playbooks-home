@@ -1,0 +1,7 @@
+---
+- name: Grafana | Configure service
+  service:
+    enabled: yes
+    name: grafana-server
+    state: started
+  when: 'not("/.dockerenv"|exists)'
