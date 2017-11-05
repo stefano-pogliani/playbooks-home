@@ -1,0 +1,9 @@
+---
+- name: Prometheus Node Exporter | Common
+  import_tasks: '../common.yml'
+
+- name: Prometheus Node Exporter | Install
+  import_tasks: 'install.yml'
+
+- name: Prometheus Node Exporter | Service
+  import_tasks: 'service.yml'

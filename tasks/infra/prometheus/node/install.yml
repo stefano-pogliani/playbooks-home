@@ -1,0 +1,31 @@
+---
+- name: Prometheus Node Exporter | Fetch archive
+  get_url:
+    url: 'https://github.com/prometheus/node_exporter/releases/download/v0.15.0/node_exporter-0.15.0.linux-amd64.tar.gz'
+    dest: '/opt/prometheus/archives/node_exporter-0.15.0.linux-amd64.tar.gz'
+    checksum: 'sha256:9413b3c94dbe9d4341ce85ea7e3f0e20abb8804135b8c236c4440c2c841551d7'
+    mode: 0644
+
+- name: Prometheus Node Exporter | Extract the release
+  unarchive:
+    remote_src: yes
+    dest: '/opt/prometheus/bin'
+    src: '/opt/prometheus/archives/node_exporter-0.15.0.linux-amd64.tar.gz'
+
+- name: Prometheus Node Exporter | Activate the current version
+  file:
+    path: '/opt/prometheus/bin/node_exporter'
+    src: '/opt/prometheus/bin/node_exporter-0.15.0.linux-amd64/node_exporter'
+    state: link
+  notify:
+    - Restart Prometheus Node Exporter
+
+- name: Prometheus Node Exporter | Render run script
+  copy:
+    dest: '/opt/prometheus/bin/run-node-exporter'
+    src:  'run-node-exporter'
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode:  0755
+  notify:
+    - Restart Prometheus Node Exporter

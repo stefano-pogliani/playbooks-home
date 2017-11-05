@@ -1,0 +1,18 @@
+---
+- name: Prometheus Node Exporter | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/prometheus-node-exporter.service'
+    src:   'prometheus-node-exporter.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart Prometheus Node Exporter
+
+- name: Prometheus Node Exporter | Configure Service
+  service:
+    enabled: yes
+    name: prometheus-node-exporter
+    state: started
+  when: 'not("/.dockerenv"|exists)'
+

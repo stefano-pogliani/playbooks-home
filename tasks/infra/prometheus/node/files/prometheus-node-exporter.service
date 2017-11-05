@@ -1,0 +1,14 @@
+[Unit]
+Description=prometheus node exporter
+After=syslog.target network.target
+
+[Service]
+Type=simple
+RemainAfterExit=no
+WorkingDirectory=/opt/prometheus
+User=prometheus
+Group=prometheus
+ExecStart=/opt/prometheus/bin/run-node-exporter
+
+[Install]
+WantedBy=multi-user.target

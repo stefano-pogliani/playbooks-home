@@ -3,8 +3,8 @@
   copy:
     dest:  '/etc/systemd/system/prometheus.service'
     src:   'prometheus.service'
-    group: 'prometheus'
-    owner: 'prometheus'
+    group: 'root'
+    owner: 'root'
     mode:   0644
   notify:
     - Restart Prometheus
