@@ -1,1 +1,1 @@
-acmetool_email: '{{ vault_acmetool_email }}'
+acmetool_email: '{{ vault_me_email }}'

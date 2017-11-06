@@ -29,12 +29,10 @@ provisioner:
   # the test secret is a pain so just delete the vaults.
   custom_pre_play_command: |
     echo 'Deleting vault files ...'
-    rm -v /tmp/kitchen/host_vars/m910q/vault_authgateway
-    rm -v /tmp/kitchen/host_vars/m910q/vault_grafana
+    rm -v /tmp/kitchen/host_vars/m910q/vault_*
     echo 'Done deleting vaults'
     echo 'Installing extra system packages ...'
-    sudo dnf install -y cronie
-    sudo dnf install -y 'dnf-command(copr)'
+    sudo dnf install -y cronie 'dnf-command(copr)'
     echo 'Done extending system'
 
   requirements_path: 'requirements.yml'
@@ -60,9 +58,11 @@ suites:
         playbook_to_test: 'playbooks/infra/authgateway.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
 
+        # Common extra vars.
+        vault_me_email: 'test@example.com'
+
         # AuthGateway extra vars.
         upstream_nginx_service_manage: false
-        vault_acmetool_email: 'test@example.com'
         vault_authgateway_client_id: 'abc'
         vault_authgateway_client_secret: 'def'
         vault_authgateway_session_secret: 'egh'

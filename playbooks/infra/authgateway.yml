@@ -12,6 +12,6 @@
 
 
 # Finally install and configure AuthGateway.
-#- hosts: m910q
-#  roles:
-#    - role: stefano-pogliani.authgateway
+- hosts: m910q
+  roles:
+    - role: stefano-pogliani.authgateway

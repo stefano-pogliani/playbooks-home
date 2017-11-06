@@ -35,6 +35,7 @@ The following is a list of vaults:
 ```bash
 openssl rand -base64 4096 | tr -d '\n' > .authgateway.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .grafana.vaultsecret
+openssl rand -base64 4096 | tr -d '\n' > .me.vaultsecret
 
 # Generate random secrets.
 openssl rand -base64 48

@@ -1,2 +1,4 @@
 # Grafana configuration
-# TODO(stefano): proxy direct use of vault_grafana
+grafana_admin_password: '{{ vault_grafana_admin_password }}'
+grafana_admin_user: '{{ vault_grafana_admin_user }}'
+grafana_secret_key: '{{ vault_grafana_secret_key }}'
