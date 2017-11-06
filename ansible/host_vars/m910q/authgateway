@@ -22,13 +22,18 @@ authgateway_extra_emails:
   - '{{ vault_me_email }}'
 
 authgateway_conf_apps:
-  - name: Wekan
-    upstream:
-      host: localhost:8081
-      protocol: http
-
   - name: Firefly-III
     upstream:
       host: localhost:8082
       protocol: http
       subdomain: firefly
+
+  - name: Grafana
+    upstream:
+      host: localhost:3000
+      protocol: http
+
+  - name: Wekan
+    upstream:
+      host: localhost:8081
+      protocol: http
