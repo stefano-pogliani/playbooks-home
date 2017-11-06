@@ -1,0 +1,7 @@
+---
+- name: AcmeTool | Configure service
+  service:
+    enabled: yes
+    name: acmetool-redirector
+    state: started
+  when: 'not("/.dockerenv"|exists)'

@@ -1,0 +1,8 @@
+---
+- name: AcmeTool | Enable copr repo
+  command: dnf copr enable hlandau/acmetool --assumeyes creates=/etc/yum.repos.d/_copr_hlandau-acmetool.repo
+
+- name: AcmeTool | Install
+  package:
+    name: acmetool
+    state: present

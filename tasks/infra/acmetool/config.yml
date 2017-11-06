@@ -1,0 +1,30 @@
+---
+- name: AcmeTool | Create response file
+  template:
+    dest: '/var/cache/acmetool.response'
+    mode: 0644
+    src:  'acmetool.response'
+
+- name: AcmeTool | Configure
+  command: acmetool --batch --response-file /var/cache/acmetool.response quickstart creates=/var/lib/acme
+
+- name: AcmeTool | Take over the default hooks
+  copy:
+    dest: '{{ item }}'
+    mode: 0655
+    content: |
+      #!/bin/bash
+      exit 0
+  with_items:
+    - '/usr/libexec/acme/hooks/haproxy'
+    - '/usr/libexec/acme/hooks/reload'
+
+- name: AcmeTool | CronJob
+  copy:
+    dest: '/etc/cron.d/acmetool'
+    mode: 0644
+    content: |
+      SHELL=/bin/sh
+      PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+      MAILTO={{ acmetool_email }}
+      38 4 * * * root /bin/acmetool --batch reconcile

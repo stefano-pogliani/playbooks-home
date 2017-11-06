@@ -13,7 +13,7 @@
     sslverify: yes
 
 - name: Grafana | Install package
-  dnf:
+  package:
     name: grafana
     state: present
   notify:
