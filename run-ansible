@@ -1,9 +1,10 @@
 #!/bin/bash
-#  Wrapper to ansible-playbook to pass all the vault options.
-ansible-playbook \
+#  Wrapper to ansible to pass all the vault options.
+ansible \
   --vault-id authgateway@.authgateway.vaultsecret \
   --vault-id grafana@.grafana.vaultsecret \
   --vault-id me@.me.vaultsecret \
   --verbose \
   --become --ask-become-pass \
   "$@"
+
