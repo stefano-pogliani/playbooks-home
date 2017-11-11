@@ -55,8 +55,8 @@ suites:
     provisioner:
       playbook: 'tests/play.yml'
       extra_vars:
-        playbook_to_test: 'playbooks/infra/authgateway.yml'
-        #playbook_to_test: 'playbooks/infra/monitoring.yml'
+        #playbook_to_test: 'playbooks/infra/authgateway.yml'
+        playbook_to_test: 'playbooks/infra/monitoring.yml'
 
         # Common extra vars.
         vault_me_email: 'test@example.com'
