@@ -39,6 +39,9 @@ openssl rand -base64 4096 | tr -d '\n' > .me.vaultsecret
 
 # Generate random secrets.
 openssl rand -base64 48
+
+# oauth2_proxy has requirements on secets size.
+openssl rand -base64 32
 ```
 
 

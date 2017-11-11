@@ -1,4 +1,4 @@
 - src: stefano-pogliani.upstream-nginx
   version: v0.0.2
 - src: stefano-pogliani.authgateway
-  version: v0.1.1
+  version: v0.1.6

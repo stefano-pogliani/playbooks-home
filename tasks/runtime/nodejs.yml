@@ -7,12 +7,12 @@
 
 - name: NodeJS | Official repo
   yum_repository:
-    baseurl: 'https://rpm.nodesource.com/pub_8.x/fc/$releasever/$basearch'
+    baseurl: 'https://rpm.nodesource.com/pub_9.x/fc/$releasever/$basearch'
     description: 'Node.js Packages for Fedora Linux $releasever - $basearch'
     enabled: true
     failovermethod: 'priority'
     gpgcheck: true
-    gpgkey: '/etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL'
+    gpgkey: 'file:///etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL'
     name: 'nodesource'
     state: present
 

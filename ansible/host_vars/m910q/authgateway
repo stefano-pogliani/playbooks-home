@@ -5,35 +5,41 @@ upstream_nginx_service_state: stopped
 
 # AuthGateway configuration for the host.
 authgateway_configure_oauth2_proxy: true
-authgateway_conf_auditor_provider: 'http'
+#authgateway_conf_auditor_provider: 'http'
 
-# TODO(stefano): 
-#authgateway_acmetool_target: '/opt/authgateway/acmetool/targets/authgateway'
-#authgateway_conf_crt_file: ''
-#authgateway_conf_key_file: ''
+authgateway_acmetool_hook: '/usr/libexec/acme/hooks/authgateway'
+authgateway_acmetool_target: '/var/lib/acme/desired/authgateway'
+authgateway_conf_crt_file: '/var/lib/acme/live/home.spogliani.net/cert'
+authgateway_conf_key_file: '/var/lib/acme/live/home.spogliani.net/privkey'
 
 authgateway_conf_domain: 'home.spogliani.net'
 authgateway_conf_provider: 'github'
 authgateway_conf_client_id: '{{ vault_authgateway_client_id }}'
 authgateway_conf_client_secret: '{{ vault_authgateway_client_secret }}'
+authgateway_conf_session_name: 'authgateway-home'
 authgateway_conf_session_secret: '{{ vault_authgateway_session_secret }}'
 
 authgateway_extra_emails:
   - '{{ vault_me_email }}'
 
 authgateway_conf_apps:
-  - name: Firefly-III
-    upstream:
-      host: localhost:8082
-      protocol: http
-      subdomain: firefly
+#  - name: Firefly-III
+#    upstream:
+#      host: localhost:8082
+#      protocol: http
+#      subdomain: firefly
 
   - name: Grafana
     upstream:
       host: localhost:3000
       protocol: http
 
-  - name: Wekan
+  - name: Prometheus
     upstream:
-      host: localhost:8081
+      host: localhost:9090
       protocol: http
+
+#  - name: Wekan
+#    upstream:
+#      host: localhost:8081
+#      protocol: http
