@@ -19,6 +19,9 @@ ansible-playbook playbooks/some/playbook.yml
 ansible-playbook --ask-become-pass \
   --vault-id authgateway@.authgateway.vaultsecret \
   playbooks/infra/monitoring.yml
+
+# Clean up Ansible retry files.
+find . -name '*.retry' -print -delete
 ```
 
 
@@ -34,6 +37,7 @@ The following is a list of vaults:
 
 ```bash
 openssl rand -base64 4096 | tr -d '\n' > .authgateway.vaultsecret
+openssl rand -base64 4096 | tr -d '\n' > .email.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .grafana.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .me.vaultsecret
 
@@ -66,4 +70,6 @@ playbooks work with the new target OS.
 
 ### Playbooks
 
-  * `authgateway.yml`
+  * `infra/authgateway.yml`
+  * `infra/email.yml`
+  * `infra/monitoring.yml`

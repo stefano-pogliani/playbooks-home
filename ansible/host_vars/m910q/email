@@ -1,0 +1,3 @@
+email_inet_protocols: 'all'
+email_relay_user: '{{ vault_email_relay_user }}'
+email_relay_password: '{{ vault_email_relay_password }}'
