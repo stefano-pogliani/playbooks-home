@@ -56,10 +56,10 @@ suites:
     provisioner:
       playbook: 'tests/play.yml'
       extra_vars:
-        #playbook_to_test: 'playbooks/infra/authgateway.yml'
-        playbook_to_test: 'playbooks/infra/backup.yml'
-        #playbook_to_test: 'playbooks/infra/email.yml'
-        #playbook_to_test: 'playbooks/infra/monitoring.yml'
+        #playbook_to_test: 'playbooks/infra/system/authgateway.yml'
+        #playbook_to_test: 'playbooks/infra/system/backup.yml'
+        #playbook_to_test: 'playbooks/infra/system/email.yml'
+        playbook_to_test: 'playbooks/infra/monitoring.yml'
 
         # Backup extra vars.
         vault_backups_aws_key: 'key'
@@ -70,7 +70,7 @@ suites:
 
         # Email extra vars.
         email_inet_protocols: 'ipv4'
-        vault_email_realy_user: 'ses-user'
+        vault_email_relay_user: 'ses-user'
         vault_email_relay_password: 'ses-passwd'
 
         # AuthGateway extra vars.

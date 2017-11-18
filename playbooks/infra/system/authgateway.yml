@@ -6,8 +6,8 @@
 
 - hosts: m910q
   tasks:
-    - import_tasks: '../../tasks/runtime/nodejs.yml'
-    - import_tasks: '../../tasks/infra/acmetool/main.yml'
+    - import_tasks: '../../../tasks/runtime/nodejs.yml'
+    - import_tasks: '../../../tasks/infra/system/acmetool/main.yml'
     # TODO(stefano): install and configure authgateway auditor.
 
 

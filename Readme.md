@@ -72,7 +72,7 @@ playbooks work with the new target OS.
 
 ### Playbooks
 
-  * `infra/authgateway.yml`
-  * `infra/backup.yml`
-  * `infra/email.yml`
+  * `infra/system/authgateway.yml`
+  * `infra/system/backup.yml`
+  * `infra/system/email.yml`
   * `infra/monitoring.yml`
