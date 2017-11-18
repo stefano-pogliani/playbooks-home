@@ -1,0 +1,36 @@
+---
+- name: Backups | Create needed directories
+  file:
+    path: '/opt/{{ item }}'
+    state: directory
+    mode: 0755
+  with_items:
+    - 'backups'
+    - 'backups/archives'
+    - 'backups/bin'
+    - 'backups/mnt'
+
+- name: Backups | GoF3r | Install
+  import_tasks: 'gof3r.yml'
+
+- name: Backups | Store AWS Secrets
+  template:
+    dest: '/opt/backups/secrets'
+    mode: 0600
+    src: 'secrets'
+
+- name: Backups | Snapshost Script
+  copy:
+    dest: '/opt/backups/snapshot.sh'
+    mode: 0750
+    src: 'snapshot.sh'
+
+- name: Backups | CronJob
+  copy:
+    dest: '/etc/cron.d/backups'
+    mode: 0644
+    content: |
+      SHELL=/bin/sh
+      PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+      MAILTO={{ backups_email }}
+      16 2 * * * root /opt/backups/snapshot.sh

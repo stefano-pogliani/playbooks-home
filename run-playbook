@@ -2,6 +2,7 @@
 #  Wrapper to ansible-playbook to pass all the vault options.
 ansible-playbook \
   --vault-id authgateway@.authgateway.vaultsecret \
+  --vault-id backups@.backups.vaultsecret \
   --vault-id email@.email.vaultsecret \
   --vault-id grafana@.grafana.vaultsecret \
   --vault-id me@.me.vaultsecret \

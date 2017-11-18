@@ -57,8 +57,13 @@ suites:
       playbook: 'tests/play.yml'
       extra_vars:
         #playbook_to_test: 'playbooks/infra/authgateway.yml'
-        playbook_to_test: 'playbooks/infra/email.yml'
+        playbook_to_test: 'playbooks/infra/backup.yml'
+        #playbook_to_test: 'playbooks/infra/email.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
+
+        # Backup extra vars.
+        vault_backups_aws_key: 'key'
+        vault_backups_aws_secret: 'secret'
 
         # Common extra vars.
         vault_me_email: 'test@example.com'

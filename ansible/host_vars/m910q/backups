@@ -1,0 +1,3 @@
+backups_aws_key: '{{ vault_backups_aws_key }}'
+backups_aws_secret: '{{ vault_backups_aws_secret }}'
+backups_email: '{{ vault_me_email }}'
