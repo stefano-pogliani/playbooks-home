@@ -1,0 +1,9 @@
+---
+- name: Prometheus | MongoDB Exporter | Common
+  import_tasks: '../common.yml'
+
+- name: Prometheus | MongoDB Exporter | Install
+  import_tasks: 'install.yml'
+
+- name: Prometheus | MongoDB Exporter | Service
+  import_tasks: 'service.yml'

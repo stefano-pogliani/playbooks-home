@@ -1,0 +1,19 @@
+---
+- name: Prometheus | MongoDB Exporter | Fetch the release
+  get_url:
+    url: 'https://github.com/dcu/mongodb_exporter/releases/download/v1.0.0/mongodb_exporter-linux-amd64'
+    dest: '/opt/prometheus/bin/mongodb_exporter'
+    checksum: 'sha256:153537eed1e59da63d036228d159c2b26bb474d4241bb95bca16ec288aa98d4c'
+    mode: 0755
+  notify:
+    - Restart Prometheus MongoDB Exporter
+
+- name: Prometheus | MongoDB Exporter | Render run script
+  copy:
+    dest: '/opt/prometheus/bin/run-mongodb-exporter'
+    src:  'run-mongodb-exporter'
+    group: 'prometheus'
+    owner: 'prometheus'
+    mode:  0755
+  notify:
+    - Restart Prometheus MongoDB Exporter

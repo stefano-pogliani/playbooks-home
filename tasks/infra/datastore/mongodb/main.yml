@@ -1,0 +1,9 @@
+---
+- name: MongoDB | Install
+  import_tasks: 'install.yml'
+
+- name: MongoDB | Configure
+  import_tasks: 'config.yml'
+
+- name: MongoDB | Service
+  import_tasks: 'service.yml'

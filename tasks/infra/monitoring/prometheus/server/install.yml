@@ -1,5 +1,5 @@
 ---
-- name: Prometheus Server | Create data directory
+- name: Prometheus | Server | Create data directory
   file:
     path: '/data/prometheus'
     state: directory
@@ -7,20 +7,20 @@
     owner: 'prometheus'
     mode: 0755
 
-- name: Prometheus Server | Fetch archive
+- name: Prometheus | Server | Fetch archive
   get_url:
     url: 'https://github.com/prometheus/prometheus/releases/download/v2.0.0/prometheus-2.0.0.linux-amd64.tar.gz'
     dest: '/opt/prometheus/archives/prometheus-2.0.0.linux-amd64.tar.gz'
     checksum: 'sha256:e12917b25b32980daee0e9cf879d9ec197e2893924bd1574604eb0f550034d46'
     mode: 0644
 
-- name: Prometheus Server | Extract the release
+- name: Prometheus | Server | Extract the release
   unarchive:
     remote_src: yes
     dest: '/opt/prometheus/bin'
     src: '/opt/prometheus/archives/prometheus-2.0.0.linux-amd64.tar.gz'
 
-- name: Prometheus Server | Activate the current version
+- name: Prometheus | Server | Activate the current version
   file:
     path: '/opt/prometheus/bin/prometheus'
     src: '/opt/prometheus/bin/prometheus-2.0.0.linux-amd64/prometheus'
@@ -28,7 +28,7 @@
   notify:
     - Restart Prometheus
 
-- name: Prometheus Server | Render run script
+- name: Prometheus | Server | Render run script
   copy:
     dest: '/opt/prometheus/bin/run-server'
     src:  'run-server'

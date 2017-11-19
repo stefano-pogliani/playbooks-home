@@ -1,0 +1,7 @@
+#!/bin/bash
+#  Wrapper script to start prometheus MongoDB exporter.
+#  Used to easily pass all the arguments to the command line.
+/opt/prometheus/bin/mongodb_exporter \
+  --logtostderr \
+  --stderrthreshold info \
+  --web.listen-address="127.0.0.1:9216"

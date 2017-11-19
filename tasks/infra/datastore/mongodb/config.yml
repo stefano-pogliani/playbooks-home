@@ -1,0 +1,36 @@
+---
+- name: MongoDB | SELinux | Install Ansible Helpers
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - 'libselinux-python3'
+    - 'policycoreutils-python3'
+
+- name: MongoDB | SELinux | Persist data directory context
+  sefcontext:
+    setype: 'mongod_var_lib_t'
+    seuser: 'system_u'
+    state:  present
+    target: '/data/mongodb'
+  when: 'not("/.dockerenv"|exists)'
+
+- name: MongoDB | Data directory
+  file:
+    path: '/data/mongodb'
+    state: directory
+    group: 'mongod'
+    owner: 'mongod'
+    mode:  0755
+    setype: 'mongod_var_lib_t'
+    seuser: 'system_u'
+
+- name: MongoDB | Configuration
+  template:
+    dest:  '/etc/mongod.conf'
+    group: 'mongod'
+    owner: 'mongod'
+    mode:  0644
+    src:   'mongod.conf'
+  notify:
+    - Restart MongoDB

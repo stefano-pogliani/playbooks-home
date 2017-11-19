@@ -1,0 +1,17 @@
+---
+- name: Prometheus | MongoDB Exporter | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/prometheus-mongodb-exporter.service'
+    src:   'prometheus-mongodb-exporter.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart Prometheus MongoDB Exporter
+
+- name: Prometheus | MongoDB Exporter | Configure Service
+  service:
+    enabled: yes
+    name: prometheus-mongodb-exporter
+    state: started
+  when: 'not("/.dockerenv"|exists)'

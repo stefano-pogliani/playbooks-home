@@ -1,5 +1,5 @@
 ---
-- name: Prometheus Server | Render config file
+- name: Prometheus | Server | Render config file
   template:
     dest:  '/opt/prometheus/config.yml'
     group: 'prometheus'

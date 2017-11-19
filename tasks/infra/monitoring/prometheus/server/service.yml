@@ -1,5 +1,5 @@
 ---
-- name: Prometheus Server | Render systemd unit
+- name: Prometheus | Server | Render systemd unit
   copy:
     dest:  '/etc/systemd/system/prometheus.service'
     src:   'prometheus.service'
@@ -9,7 +9,7 @@
   notify:
     - Restart Prometheus
 
-- name: Prometheus Server | Configure Service
+- name: Prometheus | Server | Configure Service
   service:
     enabled: yes
     name: prometheus

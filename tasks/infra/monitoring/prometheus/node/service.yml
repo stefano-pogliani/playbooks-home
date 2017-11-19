@@ -1,5 +1,5 @@
 ---
-- name: Prometheus Node Exporter | Render systemd unit
+- name: Prometheus | Node Exporter | Render systemd unit
   copy:
     dest:  '/etc/systemd/system/prometheus-node-exporter.service'
     src:   'prometheus-node-exporter.service'
@@ -9,10 +9,9 @@
   notify:
     - Restart Prometheus Node Exporter
 
-- name: Prometheus Node Exporter | Configure Service
+- name: Prometheus | Node Exporter | Configure Service
   service:
     enabled: yes
     name: prometheus-node-exporter
     state: started
   when: 'not("/.dockerenv"|exists)'
-
