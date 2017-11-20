@@ -3,6 +3,7 @@
   tasks:
     - import_tasks: '../../tasks/infra/system/backup/main.yml'
     - import_tasks: '../../tasks/infra/system/email/main.yml'
+    - import_tasks: '../../tasks/infra/system/ntp.yml'
 
   handlers:
     - name: 'Restart Postfix'
@@ -10,3 +11,7 @@
         name: postfix
         state: restarted
       when: 'not("/.dockerenv"|exists)'
+
+- hosts: m910q
+  roles:
+    - nickhammond.logrotate

@@ -1,0 +1,12 @@
+---
+- name: NTP | Install
+  package:
+    name: ntp
+    state: present
+
+- name: NTP | Configure service
+  service:
+    enabled: yes
+    name: ntpd
+    state: started
+  when: 'not("/.dockerenv"|exists)'

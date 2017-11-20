@@ -1,4 +1,9 @@
+# My roles.
 - src: stefano-pogliani.upstream-nginx
   version: v0.0.2
 - src: stefano-pogliani.authgateway
   version: v0.1.6
+
+  # Other people's roles.
+- src: nickhammond.logrotate
+  # Can't version yet, master has no tag.

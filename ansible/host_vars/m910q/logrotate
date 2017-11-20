@@ -1,0 +1,11 @@
+logrotate_scripts:
+  - name: mongodb
+    path: /var/log/mongodb/mongod.log
+    options:
+      - compress
+      - daily
+      - delaycompress
+      - missingok
+      - rotate 5
+    scripts:
+        postrotate: "[ -f /var/run/mongodb/mongod.pid ] && kill -USR1 `cat /var/run/mongodb/mongod.pid`"
