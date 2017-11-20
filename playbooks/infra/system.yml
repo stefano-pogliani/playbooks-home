@@ -1,7 +1,8 @@
 ---
 - hosts: m910q
   tasks:
-    - import_tasks: '../../../tasks/infra/system/email/main.yml'
+    - import_tasks: '../../tasks/infra/system/backup/main.yml'
+    - import_tasks: '../../tasks/infra/system/email/main.yml'
 
   handlers:
     - name: 'Restart Postfix'

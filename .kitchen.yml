@@ -56,11 +56,10 @@ suites:
     provisioner:
       playbook: 'tests/play.yml'
       extra_vars:
-        playbook_to_test: 'playbooks/infra/datastores.yml'
+        #playbook_to_test: 'playbooks/app/authgateway.yml'
+        #playbook_to_test: 'playbooks/infra/datastores.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
-        #playbook_to_test: 'playbooks/infra/system/authgateway.yml'
-        #playbook_to_test: 'playbooks/infra/system/backup.yml'
-        #playbook_to_test: 'playbooks/infra/system/email.yml'
+        playbook_to_test: 'playbooks/infra/system.yml'
 
         # Backup extra vars.
         vault_backups_aws_key: 'key'

@@ -72,8 +72,7 @@ playbooks work with the new target OS.
 
 ### Playbooks
 
+  * `app/authgateway.yml`
   * `infra/datastores.yml`
   * `infra/monitoring.yml`
-  * `infra/system/authgateway.yml`
-  * `infra/system/backup.yml`
-  * `infra/system/email.yml`
+  * `infra/system.yml`
