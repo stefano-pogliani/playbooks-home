@@ -1,8 +1,23 @@
 logrotate_scripts:
+  #*** Apps ***#
+  - name: authgateway-nginx
+    path: /opt/authgateway/http_proxy/access.log
+    options:
+      - compress
+      - create 0644 nginx nginx
+      - daily
+      - delaycompress
+      - missingok
+      - rotate 7
+    scripts:
+        postrotate: "systemctl reload authgateway"
+
+  #*** Datastores ***#
   - name: mongodb
     path: /var/log/mongodb/mongod.log
     options:
       - compress
+      - create 0640 mongod mongod
       - daily
       - delaycompress
       - missingok
