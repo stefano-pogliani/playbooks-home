@@ -116,7 +116,7 @@ echo -e '\n'
 info "Starting backup from snaphot"
 tar "--directory=${LVM_SNAP_MOUNT}" \
   --recursive --atime-preserve=system \
-  --create --acls --xattrs --gzip --verbose . \
+  --create --acls --xattrs --gzip . \
   | ${GOF3R} put --endpoint "s3-eu-central-1.amazonaws.com" \
     --bucket "${S3_BUCKET}" --key "${S3_KEY}"
 
