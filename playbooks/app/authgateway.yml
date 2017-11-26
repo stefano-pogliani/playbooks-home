@@ -4,14 +4,23 @@
   roles:
     - role: stefano-pogliani.upstream-nginx
 
-- hosts: m910q
   tasks:
     - import_tasks: '../../tasks/runtime/nodejs.yml'
     - import_tasks: '../../tasks/infra/system/acmetool/main.yml'
-    # TODO(stefano): install and configure authgateway auditor.
 
 
 # Finally install and configure AuthGateway.
 - hosts: m910q
   roles:
     - role: stefano-pogliani.authgateway
+
+  tasks:
+    - import_tasks: '../../tasks/app/authgateway/auditor.yml'
+    - import_tasks: '../../tasks/app/authgateway/reporter.yml'
+
+  handlers:
+    - name: Restart AuthGateway Auditor
+      service:
+        name: authgateway-auditor
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'

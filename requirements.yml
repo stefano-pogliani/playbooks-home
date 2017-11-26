@@ -1,8 +1,8 @@
 # My roles.
 - src: stefano-pogliani.upstream-nginx
-  version: v0.0.2
+  version: v0.0.3
 - src: stefano-pogliani.authgateway
-  version: v0.1.6
+  version: v0.2.1
 
   # Other people's roles.
 - src: nickhammond.logrotate

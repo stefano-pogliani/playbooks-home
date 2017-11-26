@@ -1,8 +1,15 @@
+# {{ ansible_managed }}
 global:
   scrape_interval: 15s
 
 
 scrape_configs:
+  - job_name: authgateway
+    metrics_path: '/api/proxied/metrics'
+    static_configs:
+      - targets:
+        - 'localhost:8090'
+
   - job_name: grafana
     metrics_path: '/metrics'
     static_configs:

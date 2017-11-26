@@ -1,0 +1,27 @@
+---
+- name: AuthGateway | Reporter | Install nodejs packages
+  npm:
+    executable: '{{ authgateway_npm_exec }}'
+    global: no
+    name: '{{ authgateway_install_path }}/node_modules/auth-gateway/utils/audit-report/'
+    path: '{{ authgateway_install_path }}/node_modules/auth-gateway/utils/audit-report'
+    production: yes
+    state: present
+
+- name: AuthGateway | Reporter | Render configuration
+  template:
+    dest:  '{{ authgateway_install_path }}/report.yml'
+    src:   'report.yml'
+    group: '{{ authgateway_user }}'
+    owner: '{{ authgateway_group }}'
+    mode:   0644
+
+- name: AuthGateway | Reporter | CronJob
+  copy:
+    dest: '/etc/cron.d/authgateway-report'
+    mode: 0644
+    content: |
+      SHELL=/bin/sh
+      PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+      MAILTO=""
+      0 10 * * 7 root /usr/bin/node /opt/authgateway/node_modules/auth-gateway/utils/audit-report/report.js /opt/authgateway/report.yml

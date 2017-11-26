@@ -1,0 +1,30 @@
+# AuthGateway audit report configuration.
+# See https://github.com/stefano-pogliani/auth-gateway/blob/master/utils/audit-report/report.example.yaml
+# {{ ansible_managed }}
+
+# ************ #
+# MongoDB conf #
+# ************ #
+mongo: 'mongodb://localhost:27017/authgateway'
+collection: 'audit'
+
+
+# *********** #
+# Report conf #
+# *********** #
+report_days: 7
+report_store_last: '/opt/authgateway/last-report.html'
+
+
+# ********** #
+# Email conf #
+# ********** #
+email_transport: 'smtp'
+email_smtp_host: 'localhost'
+email_smtp_port: 25
+email_smtp_secure: false
+
+email_skip: false
+email_from: '"AuthGateway" <authgateway@home.spogliani.net>'
+email_to:
+  - '{{ vault_me_email }}'

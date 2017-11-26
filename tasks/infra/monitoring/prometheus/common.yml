@@ -10,7 +10,7 @@
     createhome: no
     group: 'prometheus'
     name:  'prometheus'
-    shell: '/bin/false'
+    shell: '/sbin/nologin'
     state:  present
     system: yes
 
