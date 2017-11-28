@@ -1,0 +1,9 @@
+---
+- name: Thermal | Install
+  import_tasks: 'install.yml'
+
+- name: Thermal | Configure
+  import_tasks: 'config.yml'
+
+- name: Thermal | Service
+  import_tasks: 'service.yml'

@@ -1,0 +1,17 @@
+---
+- name: Thermal | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/thermal.service'
+    src:   'thermal.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart Thermal
+
+- name: Thermal | Configure Service
+  service:
+    enabled: yes
+    name: thermal
+    state: started
+  when: 'not("/.dockerenv"|exists)'

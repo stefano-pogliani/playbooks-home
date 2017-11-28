@@ -1,0 +1,40 @@
+---
+- name: Thermal | Create group
+  group:
+    name:  'thermal'
+    state:  present
+    system: yes
+
+- name: Thermal | Create user
+  user:
+    createhome: no
+    group: 'thermal'
+    name:  'thermal'
+    shell: '/sbin/nologin'
+    state:  present
+    system: yes
+
+- name: Thermal | Create install directories
+  file:
+    path: '{{ item }}'
+    state: directory
+    mode: 0755
+  with_items:
+    - '/opt/thermal'
+    - '/opt/thermal/bin'
+
+- name: Thermal | Copy Udev rule
+  copy:
+    dest: '/etc/udev/rules.d/99-temper1f.rules'
+    mode: 0644
+    src:  '99-temper1f.rules'
+
+- name: Thermal | Copy binary
+  copy:
+    dest:  '/opt/thermal/bin/thermal'
+    group: 'thermal'
+    owner: 'thermal'
+    mode:  0755
+    src:   'thermal-x86_64-linux'
+  notify:
+    - Restart Thermal

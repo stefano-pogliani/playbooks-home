@@ -1,0 +1,8 @@
+---
+- name: Thermal | Render configuration
+  copy:
+    dest:  '/opt/thermal/config.json'
+    group: 'thermal'
+    owner: 'thermal'
+    mode:  0644
+    src:   'thermal.config.json'

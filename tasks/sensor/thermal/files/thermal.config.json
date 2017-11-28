@@ -1,0 +1,27 @@
+{
+  "devices": [{
+    "model": "pcsensor/temper1f",
+    "name": "living-balcony",
+    "address": {
+      "bus": 1,
+      "port": 2
+    }
+  }, {
+    "model": "pcsensor/temper1f",
+    "name": "living-door",
+    "address": {
+      "bus": 1,
+      "port": 3
+    }
+  }],
+
+  "log": {
+    "level": "info"
+  },
+
+  "output": {
+    "type": "prometheus",
+    "bind": "127.0.0.1",
+    "port": "9300"
+  }
+}

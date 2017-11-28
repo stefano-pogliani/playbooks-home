@@ -1,6 +1,7 @@
 Ansible Playbooks for a Home Network
 ====================================
-TODO
+A personal home server running a personal home cloud.
+Ansible tasks and playbooks for configuration.
 
 
 Usage
@@ -65,14 +66,4 @@ bundle install --path=.vendor --binstubs
 ### OS Upgrades
 Prior to upgading the OS on the server test that all tasks and
 playbooks work with the new target OS.
-
-### Tasks
-
-  * `runtime/nodejs.yml`
-
-### Playbooks
-
-  * `app/authgateway.yml`
-  * `infra/datastores.yml`
-  * `infra/monitoring.yml`
-  * `infra/system.yml`
+If any error occurs, fix them and then apply the playbook to the server.

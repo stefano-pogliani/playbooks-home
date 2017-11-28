@@ -1,0 +1,11 @@
+---
+- hosts: m910q
+  tasks:
+    - import_tasks: '../../tasks/sensor/thermal/main.yml'
+
+  handlers:
+    - name: Restart Thermal
+      service:
+        name: thermal
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'
