@@ -1,0 +1,17 @@
+---
+- name: Wekan | Render systemd unit
+  template:
+    dest:  '/etc/systemd/system/wekan.service'
+    src:   'wekan.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart Wekan
+
+- name: Wekan | Service configuration
+  service:
+    enabled: yes
+    name: wekan
+    state: started
+  when: 'not("/.dockerenv"|exists)'

@@ -45,7 +45,7 @@ authgateway_conf_apps:
       host: localhost:9090
       protocol: http
 
-#  - name: Wekan
-#    upstream:
-#      host: localhost:8081
-#      protocol: http
+  - name: Wekan
+    upstream:
+      host: localhost:8081
+      protocol: http

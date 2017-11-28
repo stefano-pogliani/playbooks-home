@@ -5,10 +5,10 @@ After=syslog.target network.target
 [Service]
 Type=simple
 RemainAfterExit=no
-WorkingDirectory=/opt/prometheus
 User=prometheus
 Group=prometheus
 ExecStart=/opt/prometheus/bin/run-server
+WorkingDirectory=/opt/prometheus
 
 [Install]
 WantedBy=multi-user.target

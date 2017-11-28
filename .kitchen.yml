@@ -34,6 +34,8 @@ provisioner:
     echo 'Done deleting vaults'
     echo 'Installing extra system packages ...'
     sudo dnf install -y cronie 'dnf-command(copr)' procps-ng findutils
+    echo 'Adding udev rules directory ...'
+    sudo mkdir -p /etc/udev/rules.d
     echo 'Done extending system'
 
   requirements_path: 'requirements.yml'
@@ -57,9 +59,11 @@ suites:
       playbook: 'tests/play.yml'
       extra_vars:
         #playbook_to_test: 'playbooks/app/authgateway.yml'
+        playbook_to_test: 'playbooks/app/wekan.yml'
         #playbook_to_test: 'playbooks/infra/datastores.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
-        playbook_to_test: 'playbooks/infra/system.yml'
+        #playbook_to_test: 'playbooks/infra/system.yml'
+        #playbook_to_test: 'playbooks/sensor/thermal.yml'
 
         # Backup extra vars.
         vault_backups_aws_key: 'key'
