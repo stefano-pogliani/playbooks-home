@@ -13,13 +13,21 @@
 - name: Backups | GoF3r | Install
   import_tasks: 'gof3r.yml'
 
-- name: Backups | Store AWS Secrets
+- name: Backups | Render AWS Secrets
   template:
     dest: '/opt/backups/secrets'
     mode: 0600
     src: 'secrets'
 
-- name: Backups | Snapshost Script
+- name: Backups | Render Backups Encryption Secrets
+  copy:
+    # Only decrypt outside of Kitchen
+    decrypt: '{{ not("/.dockerenv"|exists) }}'
+    dest: '/opt/backups/backups.key'
+    mode: 0400
+    src: 'backups.key'
+
+- name: Backups | Render Snapshost Script
   copy:
     dest: '/opt/backups/snapshot.sh'
     mode: 0750

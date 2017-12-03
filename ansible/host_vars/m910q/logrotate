@@ -4,7 +4,7 @@ logrotate_scripts:
     path: /opt/authgateway/http_proxy/access.log
     options:
       - compress
-      - create 0644 nginx nginx
+      - create 0644 authgateway authgateway
       - daily
       - delaycompress
       - missingok

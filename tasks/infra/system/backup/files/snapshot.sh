@@ -13,7 +13,7 @@ LVM_SNAP_PATH="/dev/fedora/${LVM_SNAP_NAME}"
 LVM_SRC_VOL="/dev/fedora/data"
 
 START=$(date '+%Y%m%dT%H%M%S')
-BACKUP_NAME="backup-${START}.tar.gz"
+BACKUP_NAME="backup-${START}.tar.gz.enc"
 GOF3R="/opt/backups/bin/gof3r"
 SECRETS="/opt/backups/secrets"
 S3_BUCKET="spogliani-backups"
@@ -117,6 +117,7 @@ info "Starting backup from snaphot"
 tar "--directory=${LVM_SNAP_MOUNT}" \
   --recursive --atime-preserve=system \
   --create --acls --xattrs --gzip . \
+  | openssl enc -aes-256-cbc -e -pass file:/opt/backups/backups.key \
   | ${GOF3R} put --endpoint "s3-eu-central-1.amazonaws.com" \
     --bucket "${S3_BUCKET}" --key "${S3_KEY}"
 

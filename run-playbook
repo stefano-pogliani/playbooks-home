@@ -3,6 +3,7 @@
 ansible-playbook \
   --vault-id authgateway@.authgateway.vaultsecret \
   --vault-id backups@.backups.vaultsecret \
+  --vault-id backups-key@.backups-key.vaultsecret \
   --vault-id email@.email.vaultsecret \
   --vault-id grafana@.grafana.vaultsecret \
   --vault-id me@.me.vaultsecret \

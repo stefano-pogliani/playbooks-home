@@ -59,10 +59,10 @@ suites:
       playbook: 'tests/play.yml'
       extra_vars:
         #playbook_to_test: 'playbooks/app/authgateway.yml'
-        playbook_to_test: 'playbooks/app/wekan.yml'
+        #playbook_to_test: 'playbooks/app/wekan.yml'
         #playbook_to_test: 'playbooks/infra/datastores.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
-        #playbook_to_test: 'playbooks/infra/system.yml'
+        playbook_to_test: 'playbooks/infra/system.yml'
         #playbook_to_test: 'playbooks/sensor/thermal.yml'
 
         # Backup extra vars.

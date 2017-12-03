@@ -39,6 +39,7 @@ The following is a list of vaults:
 
 ```bash
 openssl rand -base64 4096 | tr -d '\n' > .authgateway.vaultsecret
+openssl rand -base64 4096 | tr -d '\n' > .backups-key.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .backups.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .email.vaultsecret
 openssl rand -base64 4096 | tr -d '\n' > .grafana.vaultsecret
