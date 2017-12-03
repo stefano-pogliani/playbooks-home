@@ -31,7 +31,8 @@ provisioner:
   custom_pre_play_command: |
     echo 'Deleting vault files ...'
     rm -v /tmp/kitchen/host_vars/m910q/vault_*
-    echo 'Done deleting vaults'
+    echo 'Updating system ...'
+    sudo dnf update -y
     echo 'Installing extra system packages ...'
     sudo dnf install -y cronie 'dnf-command(copr)' procps-ng findutils
     echo 'Adding udev rules directory ...'
