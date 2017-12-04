@@ -1,0 +1,17 @@
+---
+- name: Prometheus | PostgreSQL Exporter | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/prometheus-postgresql-exporter.service'
+    src:   'prometheus-postgresql-exporter.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart Prometheus PostgreSQL Exporter
+
+- name: Prometheus | PostgreSQL Exporter | Configure Service
+  service:
+    enabled: yes
+    name: prometheus-postgresql-exporter
+    state: started
+  when: 'not("/.dockerenv"|exists)'

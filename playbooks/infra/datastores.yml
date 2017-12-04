@@ -1,4 +1,5 @@
 ---
+# MongoDB
 - hosts: m910q
   tasks:
     - import_tasks: '../../tasks/infra/datastore/mongodb/main.yml'
@@ -14,5 +15,25 @@
     - name: Restart Prometheus MongoDB Exporter
       service:
         name: prometheus-mongodb-exporter
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'
+
+
+# PostgreSQL
+- hosts: m910q
+  tasks:
+    - import_tasks: '../../tasks/infra/datastore/postgresql/main.yml'
+    - import_tasks: '../../tasks/infra/monitoring/prometheus/postgresql/main.yml'
+
+  handlers:
+    - name: Restart PostgreSQL
+      service:
+        name: postgresql-10
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'
+
+    - name: Restart Prometheus PostgreSQL Exporter
+      service:
+        name: prometheus-postgresql-exporter
         state: restarted
       when: 'not("/.dockerenv"|exists)'

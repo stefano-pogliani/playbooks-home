@@ -1,0 +1,6 @@
+#!/bin/bash
+#  Wrapper script to start prometheus MongoDB exporter.
+#  Used to easily pass all the arguments to the command line.
+export DATA_SOURCE_NAME="user=postgres host=/var/run/postgresql/ sslmode=disable"
+/opt/prometheus/bin/postgres_exporter \
+  --web.listen-address="127.0.0.1:9187"

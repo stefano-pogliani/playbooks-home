@@ -1,0 +1,22 @@
+---
+- name: PostgreSQL | Configure Official Repo
+  yum_repository:
+    baseurl: 'https://download.postgresql.org/pub/repos/yum/10/fedora/fedora-$releasever-$basearch/'
+    description: PostgreSQL 10 $releasever - $basearch
+    enabled: yes
+    file: postgresql
+    gpgcheck: yes
+    gpgkey: 'https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-10'
+    name: pgdg10
+    repo_gpgcheck: no
+    sslcacert: '/etc/pki/tls/certs/ca-bundle.crt'
+    sslverify: yes
+
+- name: PostgreSQL | Install packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - 'postgresql10'
+    - 'postgresql10-server'
+    - 'python3-psycopg2'

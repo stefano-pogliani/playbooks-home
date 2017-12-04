@@ -1,0 +1,9 @@
+---
+- name: PostgreSQL | Install
+  import_tasks: 'install.yml'
+
+- name: PostgreSQL | Configure
+  import_tasks: 'config.yml'
+
+- name: PostgreSQL | Service
+  import_tasks: 'service.yml'

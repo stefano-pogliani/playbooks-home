@@ -1,0 +1,38 @@
+---
+- name: PostgreSQL | Create data dir
+  file:
+    path: '{{ item }}'
+    state: directory
+    group: 'postgres'
+    owner: 'postgres'
+    mode:  0700
+  with_items:
+    - '/data/postgres'
+    - '/data/postgres/10'
+
+- name: PostgreSQL | Initialise DB if need
+  become: yes
+  become_user: postgres
+  command: /usr/pgsql-10/bin/initdb --pgdata=/data/postgres/10 creates=/data/postgres/10/base
+  notify:
+    - Restart PostgreSQL
+
+- name: PostgreSQL | Configure server (postgresql.conf)
+  copy:
+    dest:  '/data/postgres/10/postgresql.conf'
+    group: 'postgres'
+    owner: 'postgres'
+    mode:  0600
+    src:   'postgresql.conf'
+  notify:
+    - Restart PostgreSQL
+
+- name: PostgreSQL | Configure client access (pg_hba.conf)
+  copy:
+    dest:  '/data/postgres/10/pg_hba.conf'
+    group: 'postgres'
+    owner: 'postgres'
+    mode:  0600
+    src:   'pg_hba.conf'
+  notify:
+    - Restart PostgreSQL
