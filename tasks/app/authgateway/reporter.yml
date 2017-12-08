@@ -24,4 +24,4 @@
       SHELL=/bin/sh
       PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
       MAILTO=""
-      0 10 * * 7 root /usr/bin/node /opt/authgateway/node_modules/auth-gateway/utils/audit-report/report.js /opt/authgateway/report.yml
+      0 10 * * 3,7 root /usr/bin/node /opt/authgateway/node_modules/auth-gateway/utils/audit-report/report.js /opt/authgateway/report.yml
