@@ -1,0 +1,12 @@
+---
+- hosts: m910q
+  tasks:
+    - import_tasks: '../../tasks/runtime/docker.yml'
+    - import_tasks: '../../tasks/app/firefly-iii/main.yml'
+
+  handlers:
+    - name: Restart FireFly-III
+      service:
+        name: firefly-iii
+        state: restarted
+      when: 'not("/.dockerenv"|exists)'

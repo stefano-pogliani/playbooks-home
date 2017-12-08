@@ -1,0 +1,39 @@
+---
+- name: FireFly-III | Create group
+  group:
+    gid: '{{ firefly_group_id }}'
+    name:  'firefly-iii'
+    state:  present
+    system: yes
+
+- name: FireFly-III | Create user
+  user:
+    createhome: no
+    group: 'firefly-iii'
+    name:  'firefly-iii'
+    shell: '/sbin/nologin'
+    state:  present
+    system: yes
+    uid: '{{ firefly_user_id }}'
+
+- name: FireFly-III | Create storage directory
+  file:
+    path: '{{ item }}'
+    group: 'firefly-iii'
+    mode:  0750
+    owner: 'firefly-iii'
+    state: directory
+  with_items:
+    - '/data/firefly-iii'
+    - '/data/firefly-iii/storage'
+    - '/data/firefly-iii/storage/app'
+    - '/data/firefly-iii/storage/app/public'
+    - '/data/firefly-iii/storage/build'
+    - '/data/firefly-iii/storage/database'
+    - '/data/firefly-iii/storage/debugbar'
+    - '/data/firefly-iii/storage/export'
+    - '/data/firefly-iii/storage/framework'
+    - '/data/firefly-iii/storage/framework/cache'
+    - '/data/firefly-iii/storage/framework/sessions'
+    - '/data/firefly-iii/storage/logs'
+    - '/data/firefly-iii/storage/upload'

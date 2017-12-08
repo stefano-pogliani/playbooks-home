@@ -1,0 +1,33 @@
+---
+- name: FireFly-III | Install
+  import_tasks: 'install.yml'
+
+- name: FireFly-III | Docker Image
+  import_tasks: 'docker-image.yml'
+
+- name: FireFly-III | Render Configuration
+  template:
+    dest:  '/data/firefly-iii/env'
+    src:   'env'
+    group: 'firefly-iii'
+    mode:   0600
+    owner: 'firefly-iii'
+  notify:
+    - Restart FireFly-III
+
+- name: FireFly-III | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/firefly-iii.service'
+    src:   'firefly-iii.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart FireFly-III
+
+- name: FireFly-III | Service configuration
+  service:
+    enabled: yes
+    name: firefly-iii
+    state: started
+  when: 'not("/.dockerenv"|exists)'

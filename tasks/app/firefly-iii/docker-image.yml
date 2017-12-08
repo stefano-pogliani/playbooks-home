@@ -1,0 +1,25 @@
+---
+- name: FireFly-III | Render dockerfile
+  copy:
+    dest: '/data/firefly-iii/{{ item }}'
+    group: 'firefly-iii'
+    mode:  0644
+    owner: 'firefly-iii'
+    src: '{{ item }}'
+  with_items:
+    - 'Dockerfile'
+    - 'entrypoint-override.sh'
+
+- name: FireFly-III | Build image
+  docker_image:
+    buildargs:
+      GROUP_ID: '{{ firefly_group_id }}'
+      USER_ID:  '{{ firefly_user_id }}'
+      LISTEN_ADDRESS: '127.0.0.1'
+      LISTEN_PORT: 8082
+    name: 'firefly-iii'
+    path: '/data/firefly-iii'
+    rm: true
+    state: present
+    tag: '4.6.11'
+  when: 'not("/.dockerenv"|exists)'

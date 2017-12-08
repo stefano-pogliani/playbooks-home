@@ -60,8 +60,9 @@ suites:
       playbook: 'tests/play.yml'
       extra_vars:
         #playbook_to_test: 'playbooks/app/authgateway.yml'
+        playbook_to_test: 'playbooks/app/firefly-iii.yml'
         #playbook_to_test: 'playbooks/app/wekan.yml'
-        playbook_to_test: 'playbooks/infra/datastores.yml'
+        #playbook_to_test: 'playbooks/infra/datastores.yml'
         #playbook_to_test: 'playbooks/infra/monitoring.yml'
         #playbook_to_test: 'playbooks/infra/system.yml'
         #playbook_to_test: 'playbooks/sensor/thermal.yml'
@@ -84,6 +85,10 @@ suites:
         vault_authgateway_client_secret: 'def'
         vault_authgateway_session_secret: 'egh'
         vault_authgateway_allowed_emails: ['test@example.com']
+
+        # FireFly-III extra vars.
+        vault_firefly_app_key: 'test'
+        vault_firefly_db_password: 'test'
 
         # Monitoring extra vars.
         vault_grafana_admin_user: admin

@@ -29,11 +29,11 @@ authgateway_extra_emails:
   - '{{ vault_me_email }}'
 
 authgateway_conf_apps:
-#  - name: Firefly-III
-#    upstream:
-#      host: localhost:8082
-#      protocol: http
-#      subdomain: firefly
+  - name: Firefly-III
+    upstream:
+      host: localhost:8082
+      protocol: http
+      subdomain: firefly
 
   - name: Grafana
     upstream:

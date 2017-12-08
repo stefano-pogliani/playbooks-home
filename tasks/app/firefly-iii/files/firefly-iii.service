@@ -1,0 +1,20 @@
+[Unit]
+Description=FireFly-III Service
+Documentation=https://firefly-iii.github.io/
+After=docker.service
+Requires=docker.service
+
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run \
+  --rm --name %n --network=host \
+  -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro \
+  -v /data/firefly-iii/storage:/var/www/firefly-iii/storage \
+  firefly-iii:4.6.11
+
+
+[Install]
+WantedBy=multi-user.target

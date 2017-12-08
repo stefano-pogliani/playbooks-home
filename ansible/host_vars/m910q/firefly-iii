@@ -1,0 +1,5 @@
+firefly_app_email: '{{ vault_me_email }}'
+firefly_app_key: '{{ vault_firefly_app_key }}'
+firefly_db_password: '{{ vault_firefly_db_password }}'
+firefly_group_id: 983
+firefly_user_id: 986

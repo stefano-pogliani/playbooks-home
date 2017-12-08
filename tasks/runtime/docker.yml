@@ -14,3 +14,8 @@
   package:
     name: 'docker-ce'
     state: present
+
+- name: Docker | Install Python3 Library
+  package:
+    name: 'python3-docker-py'
+    state: present
