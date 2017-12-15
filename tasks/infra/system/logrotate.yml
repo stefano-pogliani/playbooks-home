@@ -1,0 +1,27 @@
+---
+- name: LogRotate | SELinux | Install Ansible Helpers
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - 'libselinux-python3'
+    - 'policycoreutils-python3'
+
+- name: LogRotate | SELinux | Persist nginx directory context
+  sefcontext:
+    setype: 'var_log_t'
+    seuser: 'system_u'
+    state:  present
+    target: '{{ item }}'
+  when: 'not("/.dockerenv"|exists)'
+  with_items:
+    - '/opt/authgateway/http_proxy'
+    - '/opt/authgateway/http_proxy/access.log'
+
+- name: LogRotate | SELinux | Set nignx context
+  file:
+    path: '{{ item }}'
+    setype: 'var_log_t'
+  with_items:
+    - '/opt/authgateway/http_proxy'
+    - '/opt/authgateway/http_proxy/access.log'

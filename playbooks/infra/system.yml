@@ -15,3 +15,5 @@
 - hosts: m910q
   roles:
     - nickhammond.logrotate
+  tasks:
+    - import_tasks: '../../tasks/infra/system/logrotate.yml'
