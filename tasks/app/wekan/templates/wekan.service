@@ -17,7 +17,7 @@ ExecStart=/usr/bin/docker run \
   --env 'NODE_ENV=production' \
   --env 'PORT=8081' \
   --env 'ROOT_URL=https://wekan.home.spogliani.net' \
-  wekanteam/wekan:v0.60
+  wekanteam/wekan:v0.75
 
 
 [Install]
