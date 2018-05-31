@@ -9,4 +9,4 @@
       service:
         name: wekan
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'

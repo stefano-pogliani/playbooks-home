@@ -9,4 +9,4 @@
       service:
         name: firefly-iii
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'
