@@ -6,4 +6,4 @@
 
   # Other people's roles.
 - src: nickhammond.logrotate
-  # Can't version yet, master has no tag.
+  version: v0.0.5

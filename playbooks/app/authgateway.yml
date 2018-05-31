@@ -23,4 +23,4 @@
       service:
         name: authgateway-auditor
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'

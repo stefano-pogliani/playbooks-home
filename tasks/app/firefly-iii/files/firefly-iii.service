@@ -13,7 +13,9 @@ ExecStart=/usr/bin/docker run \
   --rm --name %n --network=host \
   -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro \
   -v /data/firefly-iii/storage:/var/www/firefly-iii/storage \
-  firefly-iii:4.7.0
+  -v /data/firefly-iii/storage/export:/var/www/firefly-iii/storage/export \
+  -v /data/firefly-iii/storage/upload:/var/www/firefly-iii/storage/upload \
+  firefly-iii:4.7.3.2
 
 
 [Install]

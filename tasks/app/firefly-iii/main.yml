@@ -30,4 +30,4 @@
     enabled: yes
     name: firefly-iii
     state: started
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'

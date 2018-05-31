@@ -13,7 +13,7 @@
     seuser: 'system_u'
     state:  present
     target: '{{ item }}'
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'
   with_items:
     - '/opt/authgateway/http_proxy'
     - '/opt/authgateway/http_proxy/access.log'

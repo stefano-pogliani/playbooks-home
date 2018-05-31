@@ -14,4 +14,4 @@
     enabled: yes
     name: wekan
     state: started
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'

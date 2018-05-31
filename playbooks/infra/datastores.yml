@@ -10,13 +10,13 @@
       service:
         name: mongod
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'
 
     - name: Restart Prometheus MongoDB Exporter
       service:
         name: prometheus-mongodb-exporter
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'
 
 
 # PostgreSQL
@@ -30,10 +30,10 @@
       service:
         name: postgresql-10
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'
 
     - name: Restart Prometheus PostgreSQL Exporter
       service:
         name: prometheus-postgresql-exporter
         state: restarted
-      when: 'not("/.dockerenv"|exists)'
+      when: 'not("/.dockerenv" is exists)'

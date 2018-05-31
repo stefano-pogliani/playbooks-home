@@ -4,4 +4,4 @@
     enabled: yes
     name: mongod
     state: started
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'

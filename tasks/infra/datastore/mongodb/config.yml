@@ -13,7 +13,7 @@
     seuser: 'system_u'
     state:  present
     target: '/data/mongodb'
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'
 
 - name: MongoDB | Data directory
   file:

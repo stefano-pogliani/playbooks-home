@@ -4,4 +4,4 @@
     enabled: yes
     name: acmetool-redirector
     state: started
-  when: 'not("/.dockerenv"|exists)'
+  when: 'not("/.dockerenv" is exists)'
