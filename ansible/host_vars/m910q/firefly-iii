@@ -3,3 +3,6 @@ firefly_app_key: '{{ vault_firefly_app_key }}'
 firefly_db_password: '{{ vault_firefly_db_password }}'
 firefly_group_id: 983
 firefly_user_id: 986
+
+firefly_listen_address: '*'
+firefly_listen_port: 8082

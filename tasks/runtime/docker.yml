@@ -19,3 +19,11 @@
   package:
     name: 'python3-docker-py'
     state: present
+
+# Configure firewalld to allow docker containers to connect to the host.
+- name: Docker | Trust internal docker network in firewalld
+  firewalld:
+    zone: trusted
+    interface: docker0
+    permanent: true
+    state: enabled

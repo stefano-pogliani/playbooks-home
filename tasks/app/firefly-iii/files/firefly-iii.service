@@ -10,7 +10,7 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker stop %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStart=/usr/bin/docker run \
-  --rm --name %n --network=host \
+  --rm --name %n -p 8082:8082 \
   -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro \
   -v /data/firefly-iii/storage:/var/www/firefly-iii/storage \
   -v /data/firefly-iii/storage/export:/var/www/firefly-iii/storage/export \

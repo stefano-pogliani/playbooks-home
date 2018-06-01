@@ -30,8 +30,8 @@ RUN mkdir -p /home/firefly-iii/.composer && \
 ARG LISTEN_ADDRESS=*
 ARG LISTEN_PORT=80
 RUN sed -i "s/Listen 80$/Listen ${LISTEN_ADDRESS}:${LISTEN_PORT}/" /etc/apache2/ports.conf && \
-    sed -i "s/[^#]Listen 443/#Listen 443/" /etc/apache2/ports.conf && \
-    sed -i "s/<VirtualHost \*:80>/<VirtualHost ${LISTEN_ADDRESS}:${LISTEN_PORT}>/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/[^#]Listen 443/#Listen 443/" /etc/apache2/ports.conf
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 
 # Override the entrypoint to not re-render the .env file

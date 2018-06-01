@@ -133,7 +133,7 @@ myorigin = home.spogliani.net
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-inet_interfaces = localhost
+inet_interfaces = localhost, 172.17.0.1
 
 # Enable IPv4, and IPv6 if supported
 #inet_protocols = all
@@ -269,7 +269,6 @@ unknown_local_recipient_reject_code = 550
 # 
 #mynetworks_style = class
 #mynetworks_style = subnet
-mynetworks_style = host
 
 # Alternatively, you can specify the mynetworks list by hand, in
 # which case Postfix ignores the mynetworks_style setting.
@@ -282,7 +281,7 @@ mynetworks_style = host
 # of listing the patterns here. Specify type:table for table-based lookups
 # (the value on the table right-hand side is not used).
 #
-#mynetworks = 168.100.189.0/28, 127.0.0.0/8
+mynetworks = 127.0.0.0/8, 172.17.0.0/16
 #mynetworks = $config_directory/mynetworks
 #mynetworks = hash:/etc/postfix/network_table
 

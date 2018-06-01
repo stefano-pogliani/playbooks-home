@@ -11,18 +11,18 @@ AWS guide does not use the built-in TLS support in favour of stunnel.
 Disclamer
 ---------
 Email server setup is not a simple task as they are easly abused.
-All email software and service takes precautions to make sure only allowed
-server can send or accept emails.
+All email software and services take precautions to make sure only allowed
+servers can send or accept emails.
 
 This guide aims at setting up a limited access relay:
 
   * Only the local host can send emails through the relay.
-  * The server does not send emails itself but requires an extenral server.
+  * The server does not send emails itself but relays them to an extenral service.
 
-In addition here is standard security warning: copy-pasting configurations from
+In addition here is the standard security warning: copy-pasting configurations from
 the internet is not a good idea.
 While I did my best to describe a simple yet secure configuration I have not
-looked through all the available configuration options.
+looked through all the available configuration options and I am not a security expert.
 
 
 Steps
