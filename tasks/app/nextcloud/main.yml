@@ -1,0 +1,33 @@
+---
+- name: NextCloud | Install
+  import_tasks: 'install.yml'
+
+- name: NextCloud | Docker Image
+  import_tasks: 'docker-image.yml'
+
+- name: NextCloud | Configure cron job
+  copy:
+    dest: '/etc/cron.d/nextcloud'
+    mode: 0644
+    content: |
+      SHELL=/bin/sh
+      PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+      MAILTO={{ acmetool_email }}
+      */15 * * * * root docker exec nextcloud.service php -f /var/www/html/cron.php
+
+- name: NextCloud | Render systemd unit
+  copy:
+    dest:  '/etc/systemd/system/nextcloud.service'
+    src:   'nextcloud.service'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  notify:
+    - Restart NextCloud
+
+- name: NextCloud | Service configuration
+  service:
+    enabled: yes
+    name: nextcloud
+    state: started
+  when: 'not("/.dockerenv" is exists)'

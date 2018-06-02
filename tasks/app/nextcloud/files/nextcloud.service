@@ -1,0 +1,21 @@
+[Unit]
+Description=NextCloud Service
+Documentation=https://nextcloud.com/support/
+After=docker.service
+Requires=docker.service
+
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run \
+  --rm --name %n \
+  --publish 8083:8080 \
+  -v /data/nextcloud:/var/www/html \
+  nextcloud-custom:13.0.2
+
+
+[Install]
+WantedBy=multi-user.target
+

@@ -40,6 +40,11 @@ authgateway_conf_apps:
       host: localhost:3000
       protocol: http
 
+  - name: NextCloud
+    upstream:
+      host: localhost:8083
+      protocol: http
+
   - name: Prometheus
     upstream:
       host: localhost:9090

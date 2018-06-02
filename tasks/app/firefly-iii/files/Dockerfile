@@ -38,6 +38,7 @@ COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY entrypoint-override.sh /entrypoint-override.sh
 RUN chmod 0755 /entrypoint-override.sh
 
+
 # Run
 USER firefly-iii
 ENTRYPOINT ["/entrypoint-override.sh"]

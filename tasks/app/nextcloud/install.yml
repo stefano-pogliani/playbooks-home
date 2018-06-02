@@ -1,0 +1,28 @@
+---
+- name: NextCloud | Create group
+  group:
+    gid: '{{ nextcloud_group_id }}'
+    name:  'nextcloud'
+    state:  present
+    system: yes
+
+- name: NextCloud | Create user
+  user:
+    createhome: no
+    group: 'nextcloud'
+    name:  'nextcloud'
+    shell: '/sbin/nologin'
+    state:  present
+    system: yes
+    uid: '{{ nextcloud_user_id }}'
+
+- name: NextCloud | Create storage directory
+  file:
+    path: '{{ item }}'
+    group: 'nextcloud'
+    mode:  0750
+    owner: 'nextcloud'
+    state: directory
+  with_items:
+    - '/data/nextcloud'
+    - '/opt/nextcloud'

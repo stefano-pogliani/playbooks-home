@@ -1,0 +1,12 @@
+---
+- hosts: m910q
+  tasks:
+    - import_tasks: '../../tasks/runtime/docker.yml'
+    - import_tasks: '../../tasks/app/nextcloud/main.yml'
+
+  handlers:
+    - name: Restart NextCloud
+      service:
+        name: nextcloud
+        state: restarted
+      when: 'not("/.dockerenv" is exists)'

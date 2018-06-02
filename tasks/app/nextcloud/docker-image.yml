@@ -1,0 +1,27 @@
+---
+- name: NextCloud | Render dockerfile
+  copy:
+    dest: '/opt/nextcloud/{{ item }}'
+    group: 'nextcloud'
+    mode:  0644
+    owner: 'nextcloud'
+    src: '{{ item }}'
+  with_items:
+    - '000-default.conf'
+    - 'apache2.conf'
+    - 'Dockerfile'
+    - 'ports.conf'
+
+- name: NextCloud | Build image
+  docker_image:
+    buildargs:
+      GROUP_ID: '{{ nextcloud_group_id }}'
+      USER_ID:  '{{ nextcloud_user_id }}'
+    name: 'nextcloud-custom'
+    path: '/opt/nextcloud'
+    rm: true
+    state: present
+    tag: '13.0.2'
+  when: 'not("/.dockerenv" is exists)'
+  notify:
+    - Restart NextCloud
