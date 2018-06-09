@@ -74,6 +74,8 @@ lvm_status() {
 
 ### Main ###
 [ -f "${SECRETS}" ] && . "${SECRETS}"
+MY_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+info "Detected public IP: ${MY_IP}"
 
 
 ### Show LVM state ###
