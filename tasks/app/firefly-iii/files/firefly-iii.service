@@ -1,7 +1,7 @@
 [Unit]
 Description=FireFly-III Service
 Documentation=https://firefly-iii.github.io/
-After=docker.service
+After=docker.service postfix.service postgresql-10.service
 Requires=docker.service
 
 

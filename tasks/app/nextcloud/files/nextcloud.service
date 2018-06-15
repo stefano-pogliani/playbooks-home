@@ -1,7 +1,7 @@
 [Unit]
 Description=NextCloud Service
 Documentation=https://nextcloud.com/support/
-After=docker.service
+After=docker.service postfix.service postgresql-10.service
 Requires=docker.service
 
 
@@ -13,7 +13,7 @@ ExecStart=/usr/bin/docker run \
   --rm --name %n \
   --publish 8083:8080 \
   -v /data/nextcloud:/var/www/html \
-  nextcloud-custom:13.0.2
+  nextcloud-custom:13.0.4
 
 
 [Install]

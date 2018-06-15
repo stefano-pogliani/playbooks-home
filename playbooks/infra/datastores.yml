@@ -1,4 +1,10 @@
 ---
+# Datastores need docker0 interface to be up.
+- hosts: m910q
+  tasks:
+    - import_tasks: '../../tasks/runtime/docker.yml'
+
+
 # MongoDB
 - hosts: m910q
   tasks:

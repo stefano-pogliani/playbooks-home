@@ -9,6 +9,22 @@
   notify:
     - Restart PostgreSQL
 
+- name: PostgreSQL | Service override directory
+  file:
+    path:  '/etc/systemd/system/postgresql-10.service.d'
+    state: directory
+    group: 'root'
+    owner: 'root'
+    mode:  0755
+
+- name: PostgreSQL | After docker service override
+  copy:
+    dest:  '/etc/systemd/system/postgresql-10.service.d/10-after-docker.conf'
+    group: 'root'
+    owner: 'root'
+    mode:  0644
+    src:   '10-after-docker.conf'
+
 - name: PostgreSQL | Configure Service
   service:
     enabled: yes

@@ -1,4 +1,20 @@
 ---
+- name: MongoDB | Service override directory
+  file:
+    path:  '/etc/systemd/system/mongod.service.d'
+    state: directory
+    group: 'root'
+    owner: 'root'
+    mode:  0755
+
+- name: MongoDB | After docker service override
+  copy:
+    dest:  '/etc/systemd/system/mongod.service.d/10-after-docker.conf'
+    group: 'root'
+    owner: 'root'
+    mode:  0644
+    src:   '10-after-docker.conf'
+
 - name: MongoDB | Configure service
   service:
     enabled: yes

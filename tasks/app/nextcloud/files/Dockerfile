@@ -1,4 +1,4 @@
-FROM nextcloud:13.0.2-apache
+FROM nextcloud:13.0.4-apache
 
 
 # Add user and group.
@@ -11,7 +11,8 @@ RUN addgroup --system --gid ${GROUP_ID} nextcloud && \
 
 
 # Install PostgreSQL 10 client.
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' > /etc/apt/sources.list.d/postgresql.list && \
+RUN apt-get update && apt-get install -y gnupg && \
+    echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/postgresql.list && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y postgresql-client-10 && \

@@ -1,7 +1,7 @@
 [Unit]
 Description=Wekan Server
 Documentation=https://github.com/wekan/wekan
-After=docker.service
+After=docker.service mongod.service postfix.service
 Requires=docker.service
 
 
@@ -12,7 +12,7 @@ ExecStartPre=-/usr/bin/docker rm %n
 ExecStart=/usr/bin/docker run \
   --rm --name %n --user=wekan \
   --env 'MAIL_FROM=Wekan <wekan@home.spogliani.net>' \
-  --env 'MAIL_URL=smtp://localhost:25/' \
+  --env 'MAIL_URL=smtp://172.17.0.1:25/' \
   --env 'MONGO_URL=mongodb://172.17.0.1:27017/wekan' \
   --env 'NODE_ENV=production' \
   --env 'PORT=8081' \
