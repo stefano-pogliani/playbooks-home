@@ -5,7 +5,7 @@ upstream_nginx_set_capabilities: true
 
 
 # Install latest release (role is not always up to date).
-authgateway_install_url: 'https://github.com/stefano-pogliani/auth-gateway/archive/v0.4.2.tar.gz'
+authgateway_install_url: 'https://github.com/stefano-pogliani/auth-gateway/archive/v0.4.3.tar.gz'
 
 
 # AuthGateway configuration for the host.
