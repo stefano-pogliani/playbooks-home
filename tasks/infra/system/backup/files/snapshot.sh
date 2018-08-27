@@ -13,6 +13,8 @@ LVM_SNAP_PATH="/dev/fedora/${LVM_SNAP_NAME}"
 LVM_SRC_VOL="/dev/fedora/data"
 
 START=$(date '+%Y%m%dT%H%M%S')
+BACKUP_FULL="no"
+BACKUP_INCREMENTAL_SNAPSHOT="/opt/backups/incremental.snapshot"
 BACKUP_NAME="backup-${START}.tar.gz.enc"
 GOF3R="/opt/backups/bin/gof3r"
 SECRETS="/opt/backups/secrets"
@@ -73,7 +75,15 @@ lvm_status() {
 
 
 ### Main ###
+# Check if a full backup was requested.
+if [ "$1" == "--full" ]; then
+  BACKUP_FULL="yes"
+fi
+
+# Load secrets if present.
 [ -f "${SECRETS}" ] && . "${SECRETS}"
+
+# Log IP daily in case DDNS fails.
 MY_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 info "Detected public IP: ${MY_IP}"
 
@@ -115,8 +125,14 @@ echo -e '\n'
 
 
 ### Do the backup ###
+if [ "${BACKUP_FULL}" == "yes" ]; then
+  info "Requested full backup"
+  rm -f "${BACKUP_INCREMENTAL_SNAPSHOT}"
+fi
+
 info "Starting backup from snaphot"
 tar "--directory=${LVM_SNAP_MOUNT}" \
+  --no-check-device "--listed-incremental=${BACKUP_INCREMENTAL_SNAPSHOT}" \
   --recursive --atime-preserve=system \
   --create --acls --xattrs --gzip . \
   | openssl enc -aes-256-cbc -e -pass file:/opt/backups/backups.key \
