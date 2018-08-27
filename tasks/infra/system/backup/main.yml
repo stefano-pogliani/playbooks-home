@@ -33,6 +33,15 @@
     mode: 0750
     src: 'snapshot.sh'
 
+- name: Backups | Render exclusion list
+  copy:
+    dest: '/opt/backups/excludes'
+    mode: 0644
+    content: |
+      ./firefly-iii/storage/framework/cache
+      ./grafana/sessions
+      ./prometheus
+
 - name: Backups | CronJob
   copy:
     dest: '/etc/cron.d/backups'

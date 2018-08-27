@@ -13,6 +13,7 @@ LVM_SNAP_PATH="/dev/fedora/${LVM_SNAP_NAME}"
 LVM_SRC_VOL="/dev/fedora/data"
 
 START=$(date '+%Y%m%dT%H%M%S')
+BACKUP_EXCLUDE_FILE="/opt/backups/excludes"
 BACKUP_FULL="no"
 BACKUP_INCREMENTAL_SNAPSHOT="/opt/backups/incremental.snapshot"
 BACKUP_NAME="backup-${START}.tar.gz.enc"
@@ -131,9 +132,13 @@ if [ "${BACKUP_FULL}" == "yes" ]; then
 fi
 
 info "Starting backup from snaphot"
+backup_exclude=""
+if [ -f "${BACKUP_EXCLUDE_FILE}" ]; then
+  backup_exclude="--exclude-from=${BACKUP_EXCLUDE_FILE}"
+fi
 tar "--directory=${LVM_SNAP_MOUNT}" \
   --no-check-device "--listed-incremental=${BACKUP_INCREMENTAL_SNAPSHOT}" \
-  --recursive --atime-preserve=system \
+  ${backup_exclude} --recursive --atime-preserve=system \
   --create --acls --xattrs --gzip . \
   | openssl enc -aes-256-cbc -e -pass file:/opt/backups/backups.key \
   | ${GOF3R} put --endpoint "s3-eu-central-1.amazonaws.com" \
