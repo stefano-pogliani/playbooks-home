@@ -1,4 +1,4 @@
-FROM jc5x/firefly-iii:release-4.7.3.2
+FROM jc5x/firefly-iii:release-4.7.9
 
 
 # Add user and group.
@@ -10,8 +10,14 @@ RUN addgroup --system --gid ${GROUP_ID} firefly-iii && \
     adduser firefly-iii www-data
 
 
+# Install gnupg for key validation.
+RUN apt-get update && \
+    apt-get install -y gnupg && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
 # Install PostgreSQL 10 client.
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' > /etc/apt/sources.list.d/postgresql.list && \
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/postgresql.list && \
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
     apt-get update && apt-get upgrade -y && \
     apt-get install -y postgresql-client-10 && \
