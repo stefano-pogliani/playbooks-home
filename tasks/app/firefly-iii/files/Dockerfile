@@ -1,4 +1,4 @@
-FROM jc5x/firefly-iii:release-4.7.9
+FROM jc5x/firefly-iii:release-4.7.8
 
 
 # Add user and group.
@@ -7,7 +7,8 @@ ARG USER_ID
 RUN addgroup --system --gid ${GROUP_ID} firefly-iii && \
     adduser --system --uid ${USER_ID} \
     -ingroup firefly-iii --disabled-login firefly-iii && \
-    adduser firefly-iii www-data
+    adduser firefly-iii www-data && \
+    a2enmod headers
 
 
 # Install gnupg for key validation.
@@ -22,6 +23,10 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc
     apt-get update && apt-get upgrade -y && \
     apt-get install -y postgresql-client-10 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
+# FIX: Patch HTTPS support because I'm not sure how to fix it.
+COPY AppServiceProvider.php /var/www/firefly-iii/app/Providers/AppServiceProvider.php
 
 
 # Fix /.composer permissions for cache.

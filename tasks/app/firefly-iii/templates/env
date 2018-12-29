@@ -1,7 +1,5 @@
 APP_DEBUG=true
 APP_ENV=production
-APP_FORCE_SSL=true
-APP_FORCE_ROOT=
 APP_KEY={{ firefly_app_key }}
 APP_LOG=daily
 APP_LOG_LEVEL=info
