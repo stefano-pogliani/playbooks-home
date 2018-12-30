@@ -35,5 +35,7 @@
     - '/data/firefly-iii/storage/framework'
     - '/data/firefly-iii/storage/framework/cache'
     - '/data/firefly-iii/storage/framework/sessions'
+    - '/data/firefly-iii/storage/framework/views'
+    - '/data/firefly-iii/storage/framework/views/v1'
     - '/data/firefly-iii/storage/logs'
     - '/data/firefly-iii/storage/upload'

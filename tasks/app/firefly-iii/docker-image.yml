@@ -7,7 +7,6 @@
     owner: 'firefly-iii'
     src: '{{ item }}'
   with_items:
-    - 'AppServiceProvider.php'
     - 'Dockerfile'
     - 'entrypoint-override.sh'
 
@@ -30,5 +29,5 @@
     path: '/data/firefly-iii'
     rm: true
     state: present
-    tag: '4.7.8'
+    tag: '4.7.9'
   when: 'not("/.dockerenv" is exists)'
