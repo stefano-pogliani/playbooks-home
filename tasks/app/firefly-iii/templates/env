@@ -47,6 +47,9 @@ EXCHANGE_RATE_SERVICE=fixerio
 MAPBOX_API_KEY=
 ANALYTICS_ID=
 SITE_OWNER={{ firefly_app_email }}
+
+# I think this was changed in 4.7.10 to be useless (and false).
+# Keep it set until it gets removed.
 USE_ENCRYPTION=true
 
 PUSHER_KEY=
@@ -58,3 +61,9 @@ DEMO_PASSWORD=
 
 IS_DOCKER=true
 IS_SANDSTORM=false
+
+# Firefly III currently supports two provider for live Currency Exchange Rates:
+# "fixer" is the default (for backward compatibility), and "ratesapi" is the new one.
+# RatesApi.IO (see https://ratesapi.io) is a FREE and OPEN SOURCE live currency exchange rates,
+# built compatible with Fixer.IO, based on data published by European Central Bank, and don't require API key.
+CER_PROVIDER=ratesapi

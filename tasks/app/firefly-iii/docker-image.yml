@@ -29,5 +29,5 @@
     path: '/data/firefly-iii'
     rm: true
     state: present
-    tag: '4.7.9'
+    tag: '4.7.14'
   when: 'not("/.dockerenv" is exists)'

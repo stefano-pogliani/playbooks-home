@@ -1,4 +1,4 @@
-FROM nextcloud:13.0.4-apache
+FROM nextcloud:15.0.4-apache
 
 
 # Add user and group.
@@ -24,7 +24,8 @@ ENV APACHE_RUN_USER=nextcloud
 ENV APACHE_RUN_GROUP=nextcloud
 COPY apache2.conf ports.conf /etc/apache2/
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
-RUN chown -R nextcloud:www-data /var/run/apache2 /var/lock/apache2
+RUN chown -R nextcloud:www-data /var/run/apache2 /var/lock/apache2 \
+    && a2enmod headers
 
 
 # Run
