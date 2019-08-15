@@ -17,7 +17,7 @@
 
 - name: Docker | Install Python3 Library
   package:
-    name: 'python3-docker-py'
+    name: 'python3-docker'
     state: present
 
 # Configure firewalld to allow docker containers to connect to the host.

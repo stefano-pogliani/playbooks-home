@@ -1,4 +1,4 @@
-FROM jc5x/firefly-iii:release-4.7.14
+FROM jc5x/firefly-iii:release-4.8.0.1
 
 
 # Add user and group.

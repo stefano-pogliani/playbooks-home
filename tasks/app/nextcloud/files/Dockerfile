@@ -1,4 +1,4 @@
-FROM nextcloud:15.0.4-apache
+FROM nextcloud:16.0.3-apache
 
 
 # Add user and group.

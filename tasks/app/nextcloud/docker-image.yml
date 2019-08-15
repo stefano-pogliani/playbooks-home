@@ -21,7 +21,7 @@
     path: '/opt/nextcloud'
     rm: true
     state: present
-    tag: '15.0.4'
+    tag: '16.0.3'
   when: 'not("/.dockerenv" is exists)'
   notify:
     - Restart NextCloud

@@ -1,12 +1,12 @@
 ---
 - name: MongoDB | Configure Official Repo
   yum_repository:
-    baseurl: 'https://repo.mongodb.org/yum/redhat/7/mongodb-org/3.4/x86_64/'
+    baseurl: 'https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.0/x86_64/'
     description: mongodb-org
     enabled: yes
     file: mongodb-org
     gpgcheck: yes
-    gpgkey: 'https://www.mongodb.org/static/pgp/server-3.4.asc'
+    gpgkey: 'https://www.mongodb.org/static/pgp/server-4.0.asc'
     name: mongodb-org
     repo_gpgcheck: yes
     sslcacert: '/etc/pki/tls/certs/ca-bundle.crt'
