@@ -42,6 +42,9 @@
       ./grafana/sessions
       ./prometheus
 
+# Backup cron jobs:
+#   * Full backup every Sunday.
+#   * Incremental backups every other day of the week.
 - name: Backups | CronJob
   copy:
     dest: '/etc/cron.d/backups'
@@ -50,5 +53,5 @@
       SHELL=/bin/sh
       PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
       MAILTO={{ backups_email }}
-      16 2 1,16 * * root /opt/backups/snapshot.sh --full
-      16 2 2-15,17-31 * * root /opt/backups/snapshot.sh
+      16 2 * * SUN     root /opt/backups/snapshot.sh --full
+      16 2 * * MON-SAT root /opt/backups/snapshot.sh

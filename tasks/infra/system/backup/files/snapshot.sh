@@ -16,11 +16,13 @@ START=$(date '+%Y%m%dT%H%M%S')
 BACKUP_EXCLUDE_FILE="/opt/backups/excludes"
 BACKUP_FULL="no"
 BACKUP_INCREMENTAL_SNAPSHOT="/opt/backups/incremental.snapshot"
-BACKUP_NAME="backup-${START}.tar.gz.enc"
+BACKUP_NAME_FULL="backup-${START}-full.tar.gz.enc"
+BACKUP_NAME_INCR="backup-${START}-incr.tar.gz.enc"
 GOF3R="/opt/backups/bin/gof3r"
 SECRETS="/opt/backups/secrets"
 S3_BUCKET="spogliani-backups"
-S3_KEY="/thinkpad-m910q/${BACKUP_NAME}"
+S3_KEY_FULL="/automated/thinkpad-m910q/${BACKUP_NAME_FULL}"
+S3_KEY_INCR="/automated/thinkpad-m910q/${BACKUP_NAME_INCR}"
 
 
 # Helpers.
@@ -60,20 +62,6 @@ check_lvm_name() {
   lvdisplay "${LVM_SNAP_PATH}" > /dev/null 2> /dev/null
 }
 
-lvm_status() {
-  info ">>> pvdisplay"
-  pvdisplay
-  echo
-
-  info ">>> vgdisplay"
-  vgdisplay
-  echo
-
-  info ">>> lvdisplay"
-  lvdisplay
-  echo
-}
-
 
 ### Main ###
 # Check if a full backup was requested.
@@ -87,12 +75,6 @@ fi
 # Log IP daily in case DDNS fails.
 MY_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 info "Detected public IP: ${MY_IP}"
-
-
-### Show LVM state ###
-info "*** LVM State before snaphot ***"
-lvm_status
-echo
 
 
 ### Validate Environment ###
@@ -115,9 +97,6 @@ lvcreate --snapshot "${LVM_SRC_VOL}" \
   --size 90G --name "${LVM_SNAP_NAME}" \
   || fail "Unable to create snapshot volume"
 
-info "*** LVM State after snaphot ***"
-lvm_status
-
 info "*** Mounting read only ***"
 mount --options nouuid --read-only \
   "${LVM_SNAP_PATH}" "${LVM_SNAP_MOUNT}" \
@@ -126,12 +105,14 @@ echo -e '\n'
 
 
 ### Do the backup ###
+backup_s3_key=${S3_KEY_INCR}
 if [ "${BACKUP_FULL}" == "yes" ]; then
   info "Requested full backup"
+  backup_s3_key=${S3_KEY_FULL}
   rm -f "${BACKUP_INCREMENTAL_SNAPSHOT}"
 fi
 
-info "Starting backup from snaphot"
+info "*** Starting backup from snaphot ***"
 backup_exclude=""
 if [ -f "${BACKUP_EXCLUDE_FILE}" ]; then
   backup_exclude="--exclude-from=${BACKUP_EXCLUDE_FILE}"
@@ -140,14 +121,11 @@ tar "--directory=${LVM_SNAP_MOUNT}" \
   --no-check-device "--listed-incremental=${BACKUP_INCREMENTAL_SNAPSHOT}" \
   ${backup_exclude} --recursive --atime-preserve=system \
   --create --acls --xattrs --gzip . \
-  | openssl enc -aes-256-cbc -e -pass file:/opt/backups/backups.key \
+  | openssl enc -aes-256-cbc -pbkdf2 -e -pass file:/opt/backups/backups.key \
   | ${GOF3R} put --endpoint "s3-eu-central-1.amazonaws.com" \
-    --bucket "${S3_BUCKET}" --key "${S3_KEY}"
+    --bucket "${S3_BUCKET}" --key "${backup_s3_key}"
 
 
 ### Clean up mount and volume ###
 info "Cleaning up after backup completed"
 cleanup
-
-info "*** LVM State after cleanup ***"
-lvm_status
