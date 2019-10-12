@@ -20,14 +20,17 @@
 
 - name: FireFly-III | Build image
   docker_image:
-    buildargs:
-      GROUP_ID: '{{ firefly_group_id }}'
-      USER_ID:  '{{ firefly_user_id }}'
-      LISTEN_ADDRESS: '{{ firefly_listen_address }}'
-      LISTEN_PORT: '{{ firefly_listen_port }}'
+    build:
+      args:
+        GROUP_ID: '{{ firefly_group_id }}'
+        USER_ID:  '{{ firefly_user_id }}'
+        LISTEN_ADDRESS: '{{ firefly_listen_address }}'
+        LISTEN_PORT: '{{ firefly_listen_port }}'
+      path: '/data/firefly-iii'
+      pull: yes
     name: 'firefly-iii'
-    path: '/data/firefly-iii'
     rm: true
+    source: build
     state: present
-    tag: '4.8.0.1'
+    tag: '4.8.1.4'
   when: 'not("/.dockerenv" is exists)'
