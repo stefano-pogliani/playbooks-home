@@ -14,14 +14,17 @@
 
 - name: NextCloud | Build image
   docker_image:
-    buildargs:
-      GROUP_ID: '{{ nextcloud_group_id }}'
-      USER_ID:  '{{ nextcloud_user_id }}'
+    build:
+      args:
+        GROUP_ID: '{{ nextcloud_group_id }}'
+        USER_ID:  '{{ nextcloud_user_id }}'
+      path: '/opt/nextcloud'
+      pull: yes
     name: 'nextcloud-custom'
-    path: '/opt/nextcloud'
     rm: true
+    source: build
     state: present
-    tag: '16.0.3'
+    tag: '17.0.2'
   when: 'not("/.dockerenv" is exists)'
   notify:
     - Restart NextCloud
