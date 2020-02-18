@@ -5,7 +5,10 @@ upstream_nginx_set_capabilities: true
 
 
 # Install latest release (role is not always up to date).
-authgateway_install_url: 'https://github.com/stefano-pogliani/auth-gateway/archive/v0.4.4.tar.gz'
+authgateway_install_url: 'https://github.com/stefano-pogliani/auth-gateway/archive/v0.4.5.tar.gz'
+authgateway_oauth2_proxy_checksum: 'sha256:8aa23a0635fe9ee5406e1cbef1fb86de44c660ff2269e05a04294989121c2408'
+authgateway_oauth2_proxy_release: 'https://github.com/pusher/oauth2_proxy/releases/download/v5.0.0'
+authgateway_oauth2_proxy_version: 'oauth2_proxy-v5.0.0.linux-amd64.go1.13.6'
 
 
 # AuthGateway configuration for the host.

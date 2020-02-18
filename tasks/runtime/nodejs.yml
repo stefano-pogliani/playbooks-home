@@ -7,7 +7,7 @@
 
 - name: NodeJS | Official repo
   yum_repository:
-    baseurl: 'https://rpm.nodesource.com/pub_10.x/fc/$releasever/$basearch'
+    baseurl: 'https://rpm.nodesource.com/pub_12.x/fc/$releasever/$basearch'
     description: 'Node.js Packages for Fedora Linux $releasever - $basearch'
     enabled: true
     failovermethod: 'priority'
