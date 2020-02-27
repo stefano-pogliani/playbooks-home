@@ -1,0 +1,11 @@
+# Variables overrides to redirect every ansible connection to the test VM created by Vagrant.
+ansible_host: 127.0.0.1
+ansible_port: 2222
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_private_key_file: tests/.vagrant/machines/ansible_tests/virtualbox/private_key
+ansible_user: vagrant
+ansible_ssh_common_args: -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+
+# Variables override to adapt to a VM.
+acme_skip_gen_certs: true
+email_inet_protocols: 'ipv4'

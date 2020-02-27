@@ -1,11 +1,9 @@
-Ansible Playbooks for a Home Network
-====================================
+# Ansible Playbooks for a Home Network
 A personal home server running a personal home cloud.
 Ansible tasks and playbooks for configuration.
 
 
-Usage
------
+## Usage
 ```bash
 # Install galaxy roles.
 ansible-galaxy install --roles-path ./roles -r requirements.yml
@@ -27,8 +25,7 @@ find . -name '*.retry' -print -delete
 ```
 
 
-Secrets
--------
+## Secrets
 Secrets are stored in Ansible Vaults.
 The master password was generated as below and is git ignored.
 
@@ -54,18 +51,49 @@ openssl rand -base64 32
 ```
 
 
-Testing
--------
-Testing is performed using kitchen and docker.
-A single kitchen setup is available at the root and various
-configurations can be tweaked to test specific things.
+## Testing
+Testing is done manually using a VirtualBox instance initialised with Vagrant.
+The special `tests/inventory.yml` inventory file is used to point ansible to the vagrant instance.
 
 ```bash
-bundle install --path=.vendor --binstubs
-./bin/kitchen test
+# Create and start the test VM.
+cd tests/
+vagrant up
+# Reboot VM after provisioning applies updates.
+vagrant reload
+cd ../
+
+# Run the needed playbooks against the instance.
+# When asked, leave the password blank.
+./run-playbooks --extra-vars @tests/m910q playbooks/to/test.yml
+
+# Destroy the test VM when done or to run a clean test.
+cd tests/
+vagrant destroy
 ```
 
 ### OS Upgrades
 Prior to upgading the OS on the server test that all tasks and
 playbooks work with the new target OS.
 If any error occurs, fix them and then apply the playbook to the server.
+
+To change the OS version for the test VM:
+
+  1. Make sure the VM is destroyed.
+  2. Update the value of `config.vm.box` to the new OS.
+  3. Recreate the VM and test the playbooks.
+
+
+## Run all playbooks
+This repo contains multiple playbooks responsible for different tasks.
+To apply them all:
+
+```bash
+./run-playbook playbooks/infra/system.yml
+./run-playbook playbooks/infra/datastores.yml
+./run-playbook playbooks/infra/monitoring.yml
+./run-playbook playbooks/app/firefly-iii.yml
+./run-playbook playbooks/app/nextcloud.yml
+./run-playbook playbooks/app/wekan.yml
+./run-playbook playbooks/app/authgateway.yml
+```

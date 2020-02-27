@@ -18,6 +18,12 @@
     - '/opt/authgateway/http_proxy'
     - '/opt/authgateway/http_proxy/access.log'
 
+- name: LogRotate | SELinux | Mock nginx logs.
+  file:
+    path: '/opt/authgateway/http_proxy/access.log'
+    state: touch
+  when: acme_skip_gen_certs is defined
+
 - name: LogRotate | SELinux | Set nignx context
   file:
     path: '{{ item }}'

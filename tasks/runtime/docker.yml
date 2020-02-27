@@ -27,3 +27,9 @@
     interface: docker0
     permanent: true
     state: enabled
+
+- name: Docker | Service
+  service:
+    enabled: yes
+    name: docker
+    state: started

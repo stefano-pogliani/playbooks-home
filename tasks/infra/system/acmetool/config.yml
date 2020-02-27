@@ -7,6 +7,17 @@
 
 - name: AcmeTool | Configure
   command: acmetool --batch --response-file /var/cache/acmetool.response quickstart creates=/var/lib/acme
+  when: acme_skip_gen_certs is undefined
+
+- name: AcmeTool | Mock AuthGateway target path
+  file:
+    path: '{{ item }}'
+    recurse: true
+    state: directory
+  with_items:
+    - '/var/lib/acme/desired'
+    - '/usr/libexec/acme/hooks'
+  when: acme_skip_gen_certs is defined
 
 - name: AcmeTool | Take over the default hooks
   copy:

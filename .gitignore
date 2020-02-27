@@ -3,6 +3,7 @@
 *.vaultsecret
 ansible.log
 
+.vagrant/
 .bundle/
 .kitchen/
 .vendor/
