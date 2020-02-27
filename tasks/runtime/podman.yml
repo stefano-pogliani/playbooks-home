@@ -1,0 +1,5 @@
+---
+- name: Prodman | Install
+  package:
+    name: 'podman'
+    state: present

@@ -1,21 +1,24 @@
 [Unit]
 Description=FireFly-III Service
 Documentation=https://firefly-iii.github.io/
-After=docker.service postfix.service postgresql-10.service
-Requires=docker.service
+After=postfix.service postgresql-10.service
 
 
 [Service]
-TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker stop %n
-ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run \
-  --rm --name %n \
-  --publish 8082:8082 \
-  -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro \
-  -v /data/firefly-iii/storage:/var/www/firefly-iii/storage \
-  -v /data/firefly-iii/storage/export:/var/www/firefly-iii/storage/export \
-  -v /data/firefly-iii/storage/upload:/var/www/firefly-iii/storage/upload \
+Type=forking
+KillMode=none
+PIDFile=/%t/%n-pid
+
+ExecStartPre=-/usr/bin/podman stop %n
+ExecStartPre=-/usr/bin/podman rm %n
+ExecStart=/usr/bin/podman run \
+  --conmon-pidfile /%t/%n-pid \
+  --detach --rm --name %n \
+  --network host \
+  -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro,z \
+  -v /data/firefly-iii/storage:/var/www/firefly-iii/storage:z \
+  -v /data/firefly-iii/storage/export:/var/www/firefly-iii/storage/export:z \
+  -v /data/firefly-iii/storage/upload:/var/www/firefly-iii/storage/upload:z \
   firefly-iii:4.8.2
 
 

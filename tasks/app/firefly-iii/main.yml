@@ -2,8 +2,8 @@
 - name: FireFly-III | Install
   import_tasks: 'install.yml'
 
-- name: FireFly-III | Docker Image
-  import_tasks: 'docker-image.yml'
+- name: FireFly-III | Container Image
+  import_tasks: 'container-image.yml'
 
 - name: FireFly-III | Render Configuration
   template:
@@ -26,8 +26,8 @@
     - Restart FireFly-III
 
 - name: FireFly-III | Service configuration
-  service:
+  systemd:
+    daemon_reload: yes
     enabled: yes
     name: firefly-iii
     state: started
-  when: 'not("/.dockerenv" is exists)'

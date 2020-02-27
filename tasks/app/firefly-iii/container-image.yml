@@ -1,0 +1,56 @@
+---
+- name: FireFly-III | Render dockerfile
+  copy:
+    dest: '/data/firefly-iii/{{ item }}'
+    group: 'firefly-iii'
+    mode:  0644
+    owner: 'firefly-iii'
+    src: '{{ item }}'
+  with_items:
+    - 'Dockerfile'
+    - 'entrypoint-override.sh'
+
+- name: FireFly-III | Render VirtualHost
+  template:
+    dest:  '/data/firefly-iii/000-default.conf'
+    src:   '000-default.conf'
+    group: 'firefly-iii'
+    mode:   0644
+    owner: 'firefly-iii'
+
+# The podman_image module does not support build arguments.
+# Build the image with the command module instead.
+- name: FireFly-III | Look for image
+  ignore_errors: true
+  register: image_check
+  command:
+    argv:
+      - 'podman'
+      - 'image'
+      - 'inspect'
+      - '--format'
+      - 'found'
+      - 'firefly-iii:4.8.2'
+
+- name: FireFly-III | Build image
+  when: image_check.rc != 0
+  command:
+    argv:
+      - 'podman'
+      - 'build'
+      - '--force-rm'
+      - '--rm'
+      - '--tag=firefly-iii:4.8.2'
+      - '--pull'
+      - '--quiet'
+      - '--format'
+      - 'docker'
+      - '--build-arg'
+      - 'GROUP_ID={{ firefly_group_id }}'
+      - '--build-arg'
+      - 'USER_ID={{ firefly_user_id }}'
+      - '--build-arg'
+      - 'LISTEN_ADDRESS={{ firefly_listen_address }}'
+      - '--build-arg'
+      - 'LISTEN_PORT={{ firefly_listen_port }}'
+      - '/data/firefly-iii'
