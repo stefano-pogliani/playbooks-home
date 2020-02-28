@@ -13,7 +13,7 @@ ExecStartPre=-/usr/bin/podman stop %n
 ExecStartPre=-/usr/bin/podman rm %n
 ExecStart=/usr/bin/podman run \
   --conmon-pidfile /%t/%n-pid \
-  --detach --rm --name %n \
+  --detach --name %n \
   --network host \
   -v /data/firefly-iii/env:/var/www/firefly-iii/.env:ro,z \
   -v /data/firefly-iii/storage:/var/www/firefly-iii/storage:z \

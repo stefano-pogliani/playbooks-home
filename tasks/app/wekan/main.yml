@@ -10,8 +10,8 @@
     - Restart Wekan
 
 - name: Wekan | Service configuration
-  service:
+  systemd:
+    daemon_reload: yes
     enabled: yes
     name: wekan
     state: started
-  when: 'not("/.dockerenv" is exists)'

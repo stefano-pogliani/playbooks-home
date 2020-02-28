@@ -13,7 +13,7 @@ ExecStartPre=-/usr/bin/podman stop %n
 ExecStartPre=-/usr/bin/podman rm %n
 ExecStart=/usr/bin/podman run \
   --conmon-pidfile /%t/%n-pid \
-  --detach --rm --name %n \
+  --detach --name %n \
   --network host \
   -v /data/nextcloud:/var/www/html:z \
   nextcloud-custom:17.0.2

@@ -1,24 +1,29 @@
 [Unit]
 Description=Wekan Server
 Documentation=https://github.com/wekan/wekan
-After=docker.service mongod.service postfix.service
-Requires=docker.service
+After=mongod.service postfix.service
 
 
 [Service]
-TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker stop %n
-ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run \
-  --rm --name %n --user=wekan \
+Type=forking
+KillMode=none
+PIDFile=/%t/%n-pid
+
+ExecStartPre=-/usr/bin/podman stop %n
+ExecStartPre=-/usr/bin/podman rm %n
+ExecStart=/usr/bin/podman run \
+  --conmon-pidfile /%t/%n-pid \
+  --detach --name %n \
+  --network host \
+  --user=wekan \
   --env 'MAIL_FROM=Wekan <wekan@home.spogliani.net>' \
-  --env 'MAIL_URL=smtp://172.17.0.1:25/' \
-  --env 'MONGO_URL=mongodb://172.17.0.1:27017/wekan' \
+  --env 'MAIL_URL=smtp://127.0.0.1:25/' \
+  --env 'MONGO_URL=mongodb://127.0.0.1:27017/wekan' \
   --env 'NODE_ENV=production' \
   --env 'PORT=8081' \
   --env 'ROOT_URL=https://wekan.home.spogliani.net' \
-  --publish 8081:8081 \
   wekanteam/wekan:v3.69
+ExecStop=/usr/bin/podman stop %n
 
 
 [Install]
