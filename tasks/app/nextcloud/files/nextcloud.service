@@ -1,21 +1,24 @@
 [Unit]
 Description=NextCloud Service
 Documentation=https://nextcloud.com/support/
-After=docker.service postfix.service postgresql-10.service
-Requires=docker.service
+After=postfix.service postgresql-10.service
 
 
 [Service]
-TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker stop %n
-ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run \
-  --rm --name %n \
-  --publish 8083:8080 \
-  -v /data/nextcloud:/var/www/html \
+Type=forking
+KillMode=none
+PIDFile=/%t/%n-pid
+
+ExecStartPre=-/usr/bin/podman stop %n
+ExecStartPre=-/usr/bin/podman rm %n
+ExecStart=/usr/bin/podman run \
+  --conmon-pidfile /%t/%n-pid \
+  --detach --rm --name %n \
+  --network host \
+  -v /data/nextcloud:/var/www/html:z \
   nextcloud-custom:17.0.2
+ExecStop=/usr/bin/podman stop %n
 
 
 [Install]
 WantedBy=multi-user.target
-

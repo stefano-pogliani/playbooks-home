@@ -20,6 +20,7 @@ ExecStart=/usr/bin/podman run \
   -v /data/firefly-iii/storage/export:/var/www/firefly-iii/storage/export:z \
   -v /data/firefly-iii/storage/upload:/var/www/firefly-iii/storage/upload:z \
   firefly-iii:4.8.2
+ExecStop=/usr/bin/podman stop %n
 
 
 [Install]

@@ -133,7 +133,7 @@ myorigin = home.spogliani.net
 #inet_interfaces = all
 #inet_interfaces = $myhostname
 #inet_interfaces = $myhostname, localhost
-inet_interfaces = all
+inet_interfaces = localhost
 
 # Enable IPv4, and IPv6 if supported
 #inet_protocols = all

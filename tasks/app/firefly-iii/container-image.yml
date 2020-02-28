@@ -21,6 +21,7 @@
 # The podman_image module does not support build arguments.
 # Build the image with the command module instead.
 - name: FireFly-III | Look for image
+  check_mode: false
   ignore_errors: true
   register: image_check
   command:
@@ -43,8 +44,6 @@
       - '--tag=firefly-iii:4.8.2'
       - '--pull'
       - '--quiet'
-      - '--format'
-      - 'docker'
       - '--build-arg'
       - 'GROUP_ID={{ firefly_group_id }}'
       - '--build-arg'
@@ -54,3 +53,5 @@
       - '--build-arg'
       - 'LISTEN_PORT={{ firefly_listen_port }}'
       - '/data/firefly-iii'
+  notify:
+    - Restart FireFly-III

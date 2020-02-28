@@ -2,8 +2,8 @@
 - name: NextCloud | Install
   import_tasks: 'install.yml'
 
-- name: NextCloud | Docker Image
-  import_tasks: 'docker-image.yml'
+- name: NextCloud | Container Image
+  import_tasks: 'container-image.yml'
 
 - name: NextCloud | Configure cron job
   copy:
@@ -13,7 +13,7 @@
       SHELL=/bin/sh
       PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
       MAILTO={{ acmetool_email }}
-      */15 * * * * root docker exec nextcloud.service php -f /var/www/html/cron.php
+      */15 * * * * root podman exec nextcloud.service php -f /var/www/html/cron.php
 
 - name: NextCloud | Render systemd unit
   copy:
@@ -26,8 +26,8 @@
     - Restart NextCloud
 
 - name: NextCloud | Service configuration
-  service:
+  systemd:
+    daemon_reload: yes
     enabled: yes
     name: nextcloud
     state: started
-  when: 'not("/.dockerenv" is exists)'
