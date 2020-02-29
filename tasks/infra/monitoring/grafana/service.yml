@@ -4,4 +4,3 @@
     enabled: yes
     name: grafana-server
     state: started
-  when: 'not("/.dockerenv" is exists)'

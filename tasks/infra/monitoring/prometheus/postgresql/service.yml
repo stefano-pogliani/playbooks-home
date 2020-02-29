@@ -10,8 +10,8 @@
     - Restart Prometheus PostgreSQL Exporter
 
 - name: Prometheus | PostgreSQL Exporter | Configure Service
-  service:
+  systemd:
+    daemon_reload: yes
     enabled: yes
     name: prometheus-postgresql-exporter
     state: started
-  when: 'not("/.dockerenv" is exists)'

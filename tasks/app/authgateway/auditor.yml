@@ -24,8 +24,7 @@
     - Restart AuthGateway Auditor
 
 - name: AuthGateway | Auditor | Configure Service
-  service:
-    enabled: yes
+  systemd:
+    daemon_reload: yes
     name: authgateway-auditor
     state: started
-  when: 'not("/.dockerenv" is exists)'

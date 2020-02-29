@@ -1,10 +1,4 @@
 ---
-# postfix need docker0 interface to be up.
-- hosts: m910q
-  tasks:
-    - import_tasks: '../../tasks/runtime/docker.yml'
-
-
 - hosts: m910q
   tasks:
     - import_tasks: '../../tasks/infra/system/backup/main.yml'
@@ -16,7 +10,6 @@
       service:
         name: postfix
         state: restarted
-      when: 'not("/.dockerenv" is exists)'
 
 - hosts: m910q
   roles:

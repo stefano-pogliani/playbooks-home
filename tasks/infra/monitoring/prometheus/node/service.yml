@@ -10,8 +10,8 @@
     - Restart Prometheus Node Exporter
 
 - name: Prometheus | Node Exporter | Configure Service
-  service:
+  systemd:
+    daemon_reload: yes
     enabled: yes
     name: prometheus-node-exporter
     state: started
-  when: 'not("/.dockerenv" is exists)'

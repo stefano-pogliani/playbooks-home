@@ -10,16 +10,13 @@
       service:
         name: prometheus
         state: restarted
-      when: 'not("/.dockerenv" is exists)'
 
     - name: Restart Prometheus Node Exporter
       service:
         name: prometheus-node-exporter
         state: restarted
-      when: 'not("/.dockerenv" is exists)'
 
     - name: Restart Grafana
       service:
         name: grafana-server
         state: restarted
-      when: 'not("/.dockerenv" is exists)'

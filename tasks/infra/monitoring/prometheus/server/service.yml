@@ -10,8 +10,7 @@
     - Restart Prometheus
 
 - name: Prometheus | Server | Configure Service
-  service:
-    enabled: yes
+  systemd:
+    daemon_reload: yes
     name: prometheus
     state: started
-  when: 'not("/.dockerenv" is exists)'

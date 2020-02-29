@@ -21,8 +21,6 @@
 
 - name: Backups | Render Backups Encryption Secrets
   copy:
-    # Only decrypt outside of Kitchen
-    decrypt: '{{ not("/.dockerenv" is exists) }}'
     dest: '/opt/backups/backups.key'
     mode: 0400
     src: 'backups.key'

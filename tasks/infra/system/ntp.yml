@@ -9,4 +9,3 @@
     enabled: yes
     name: ntpd
     state: started
-  when: 'not("/.dockerenv" is exists)'
