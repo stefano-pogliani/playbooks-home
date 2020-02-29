@@ -22,7 +22,7 @@ ExecStart=/usr/bin/podman run \
   --env 'NODE_ENV=production' \
   --env 'PORT=8081' \
   --env 'ROOT_URL=https://wekan.home.spogliani.net' \
-  wekanteam/wekan:v3.69
+  wekanteam/wekan:v3.80
 ExecStop=/usr/bin/podman stop %n
 
 

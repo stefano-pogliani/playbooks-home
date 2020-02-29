@@ -25,7 +25,7 @@
       - 'inspect'
       - '--format'
       - 'found'
-      - 'nextcloud-custom:17.0.2'
+      - 'nextcloud-custom:18.0.1'
 
 - name: NextCloud | Build image
   when: image_check.rc != 0
@@ -35,7 +35,7 @@
       - 'build'
       - '--force-rm'
       - '--rm'
-      - '--tag=nextcloud-custom:17.0.2'
+      - '--tag=nextcloud-custom:18.0.1'
       - '--pull'
       - '--quiet'
       - '--build-arg'
