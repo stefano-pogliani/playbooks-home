@@ -5,17 +5,7 @@
 - name: NextCloud | Container Image
   import_tasks: 'container-image.yml'
 
-- name: NextCloud | Configure cron job
-  copy:
-    dest: '/etc/cron.d/nextcloud'
-    mode: 0644
-    content: |
-      SHELL=/bin/sh
-      PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-      MAILTO={{ acmetool_email }}
-      */15 * * * * root podman exec nextcloud.service php -f /var/www/html/cron.php
-
-- name: NextCloud | Render systemd unit
+- name: NextCloud | Render systemd service unit
   copy:
     dest:  '/etc/systemd/system/nextcloud.service'
     src:   'nextcloud.service'
@@ -25,9 +15,27 @@
   notify:
     - Restart NextCloud
 
+- name: NextCloud | Render systemd timer units
+  copy:
+    dest:  '/etc/systemd/system/{{ item }}'
+    src:   '{{ item }}'
+    group: 'root'
+    owner: 'root'
+    mode:   0644
+  with_items:
+    - 'nextcloud-cron.service'
+    - 'nextcloud-cron.timer'
+
 - name: NextCloud | Service configuration
   systemd:
     daemon_reload: yes
     enabled: yes
     name: nextcloud
+    state: started
+
+- name: NextCloud | Cron Timer configuration
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: nextcloud-cron.timer
     state: started

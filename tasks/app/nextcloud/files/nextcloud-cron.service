@@ -1,0 +1,9 @@
+[Unit]
+Description=NextCloud Cron Service
+Documentation=https://nextcloud.com/support/
+Requires=nextcloud.service
+
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/podman exec --tty nextcloud.service php -f /var/www/html/cron.php 
