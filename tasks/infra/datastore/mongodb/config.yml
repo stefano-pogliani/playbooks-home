@@ -12,7 +12,7 @@
     setype: 'mongod_var_lib_t'
     seuser: 'system_u'
     state:  present
-    target: '/data/mongodb'
+    target: '/data/mongodb.*'
 
 - name: MongoDB | Data directory
   file:

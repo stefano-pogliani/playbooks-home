@@ -1,5 +1,5 @@
 ---
-- name: Prodman | Install
+- name: Podman | Install
   package:
     name: 'podman'
     state: present

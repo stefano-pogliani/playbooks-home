@@ -1,0 +1,20 @@
+- name: Infra | System
+  import_playbook: infra/system.yml
+
+- name: Infra | Datastores
+  import_playbook: infra/datastores.yml
+
+- name: Infra | Monitoring
+  import_playbook: infra/monitoring.yml
+
+- name: App | Firefly III
+  import_playbook: app/firefly-iii.yml
+
+- name: App | Nextcloud
+  import_playbook: app/nextcloud.yml
+
+- name: App | Wekan
+  import_playbook: app/wekan.yml
+
+- name: App | AuthGateway
+  import_playbook: app/authgateway.yml

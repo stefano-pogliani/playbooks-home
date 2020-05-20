@@ -65,7 +65,7 @@ cd ../
 
 # Run the needed playbooks against the instance.
 # When asked, leave the password blank.
-./run-playbooks --extra-vars @tests/m910q playbooks/to/test.yml
+./run-playbook --extra-vars @tests/m910q playbooks/to/test.yml
 
 # Destroy the test VM when done or to run a clean test.
 cd tests/
@@ -86,14 +86,4 @@ To change the OS version for the test VM:
 
 ## Run all playbooks
 This repo contains multiple playbooks responsible for different tasks.
-To apply them all:
-
-```bash
-./run-playbook playbooks/infra/system.yml
-./run-playbook playbooks/infra/datastores.yml
-./run-playbook playbooks/infra/monitoring.yml
-./run-playbook playbooks/app/firefly-iii.yml
-./run-playbook playbooks/app/nextcloud.yml
-./run-playbook playbooks/app/wekan.yml
-./run-playbook playbooks/app/authgateway.yml
-```
+To apply them all you can run `playbooks/all.yml`, which runs them in order.

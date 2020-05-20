@@ -8,7 +8,7 @@
   pip:
     name: 'eve'
     state: present
-    version: '0.9.2'
+    version: '1.1.1'
     virtualenv: '{{ authgateway_install_path }}/auditor'
     virtualenv_command: 'virtualenv'
     virtualenv_python: python3
