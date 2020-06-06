@@ -1,0 +1,30 @@
+---
+- name: Unbound | Render configuration
+  copy:
+    dest:  '/etc/unbound/unbound.conf'
+    group: 'unbound'
+    owner: 'unbound'
+    mode:  0600
+    src:   'unbound.conf'
+  notify:
+    - Restart Unbound
+
+- name: Unbound | Render home server redirect
+  copy:
+    dest:  '/etc/unbound/local.d/home.conf'
+    group: 'unbound'
+    owner: 'unbound'
+    mode:  0600
+    src:   'home.conf'
+  notify:
+    - Restart Unbound
+
+- name: Unbound | Render internal network dhcp forwarding
+  copy:
+    dest:  '/etc/unbound/conf.d/dhcp.conf'
+    group: 'unbound'
+    owner: 'unbound'
+    mode:  0600
+    src:   'dhcp.conf'
+  notify:
+    - Restart Unbound

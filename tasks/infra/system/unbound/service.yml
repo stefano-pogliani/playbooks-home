@@ -1,0 +1,6 @@
+---
+- name: Unbound | Configure Service
+  service:
+    enabled: yes
+    name: unbound
+    state: started

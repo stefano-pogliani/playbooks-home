@@ -1,0 +1,9 @@
+---
+- name: Unbound | Install
+  import_tasks: 'install.yml'
+
+- name: Unbound | Configure
+  import_tasks: 'config.yml'
+
+- name: Unbound | Service
+  import_tasks: 'service.yml'

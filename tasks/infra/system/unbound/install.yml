@@ -1,0 +1,5 @@
+---
+- name: Unbound | Install packages
+  package:
+    name: 'unbound'
+    state: present
