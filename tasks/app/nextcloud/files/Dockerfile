@@ -1,4 +1,4 @@
-FROM nextcloud:18.0.1-apache
+FROM nextcloud:19.0.0-apache
 
 
 # Add user and group.
@@ -30,9 +30,9 @@ RUN chown -R nextcloud:www-data /var/run/apache2 /var/lock/apache2 \
 
 # Once nextcloud is installed run these on the host.
 # Tweak NextCloud security headers enforced by AuthGateway to avoid duplicates.
-#RUN sed -i '/Header always set X-Content-Type-Options/d' /data/nextcloud/.htaccess \
-#    && sed -i '/Header always set X-Frame-Options/d' /data/nextcloud/.htaccess \
-#    && sed -i '/Header always set X-XSS-Protection/d' /data/nextcloud/.htaccess
+#sed -i '/Header always set X-Content-Type-Options/d' /data/nextcloud/.htaccess \
+#  && sed -i '/Header always set X-Frame-Options/d' /data/nextcloud/.htaccess \
+#  && sed -i '/Header always set X-XSS-Protection/d' /data/nextcloud/.htaccess
 
 
 # Run

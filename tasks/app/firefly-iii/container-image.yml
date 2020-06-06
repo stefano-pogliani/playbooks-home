@@ -21,6 +21,7 @@
 # The podman_image module does not support build arguments.
 # Build the image with the command module instead.
 - name: FireFly-III | Look for image
+  changed_when: false
   check_mode: false
   ignore_errors: true
   register: image_check

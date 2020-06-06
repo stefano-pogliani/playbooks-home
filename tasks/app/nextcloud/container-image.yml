@@ -15,6 +15,7 @@
 # The podman_image module does not support build arguments.
 # Build the image with the command module instead.
 - name: NextCloud | Look for image
+  changed_when: false
   check_mode: false
   ignore_errors: true
   register: image_check
@@ -25,7 +26,7 @@
       - 'inspect'
       - '--format'
       - 'found'
-      - 'nextcloud-custom:18.0.1'
+      - 'nextcloud-custom:19.0.0'
 
 - name: NextCloud | Build image
   when: image_check.rc != 0
@@ -35,7 +36,7 @@
       - 'build'
       - '--force-rm'
       - '--rm'
-      - '--tag=nextcloud-custom:18.0.1'
+      - '--tag=nextcloud-custom:19.0.0'
       - '--pull'
       - '--quiet'
       - '--build-arg'

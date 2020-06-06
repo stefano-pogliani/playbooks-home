@@ -1,21 +1,21 @@
 ---
 - name: Prometheus | Node Exporter | Fetch archive
   get_url:
-    url: 'https://github.com/prometheus/node_exporter/releases/download/v0.15.1/node_exporter-0.15.1.linux-amd64.tar.gz'
-    dest: '/opt/prometheus/archives/node_exporter-0.15.1.linux-amd64.tar.gz'
-    checksum: 'sha256:7ffb3773abb71dd2b2119c5f6a7a0dbca0cff34b24b2ced9e01d9897df61a127'
+    url: 'https://github.com/prometheus/node_exporter/releases/download/v1.0.0/node_exporter-1.0.0.linux-amd64.tar.gz'
+    dest: '/opt/prometheus/archives/node_exporter-1.0.0.linux-amd64.tar.gz'
+    checksum: 'sha256:fae88be0aa33c8ae22340723f9b4a4e519e67d2969da7a27751e755db7e75788'
     mode: 0644
 
 - name: Prometheus | Node Exporter | Extract the release
   unarchive:
     remote_src: yes
     dest: '/opt/prometheus/bin'
-    src: '/opt/prometheus/archives/node_exporter-0.15.1.linux-amd64.tar.gz'
+    src: '/opt/prometheus/archives/node_exporter-1.0.0.linux-amd64.tar.gz'
 
 - name: Prometheus | Node Exporter | Activate the current version
   file:
     path: '/opt/prometheus/bin/node_exporter'
-    src: '/opt/prometheus/bin/node_exporter-0.15.1.linux-amd64/node_exporter'
+    src: '/opt/prometheus/bin/node_exporter-1.0.0.linux-amd64/node_exporter'
     state: link
   notify:
     - Restart Prometheus Node Exporter

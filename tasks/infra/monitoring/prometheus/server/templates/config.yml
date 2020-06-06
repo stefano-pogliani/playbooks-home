@@ -39,9 +39,3 @@ scrape_configs:
     static_configs:
       - targets:
         - 'localhost:9090'
-
-  - job_name: thermal
-    metrics_path: '/metrics'
-    static_configs:
-      - targets:
-        - 'localhost:9300'

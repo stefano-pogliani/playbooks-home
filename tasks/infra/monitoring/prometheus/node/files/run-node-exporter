@@ -2,5 +2,6 @@
 #  Wrapper script to start prometheus node exporter.
 #  Used to easily pass all the arguments to the command line.
 /opt/prometheus/bin/node_exporter \
+  --collector.ntp \
   --log.level info \
   --web.listen-address="127.0.0.1:9100"

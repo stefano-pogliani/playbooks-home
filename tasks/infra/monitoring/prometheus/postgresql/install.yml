@@ -1,21 +1,21 @@
 ---
 - name: Prometheus | PostgreSQL Exporter | Fetch archive
   get_url:
-    url: 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.4.1/postgres_exporter_v0.4.1_linux-amd64.tar.gz'
-    dest: '/opt/prometheus/archives/postgres_exporter_v0.4.1_linux-amd64.tar.gz'
-    checksum: 'sha256:219c2c116cb496d54ddbd23f392a38c3496ab8e7118dfbf8b7c0b21593dedbfd'
+    url: 'https://github.com/wrouesnel/postgres_exporter/releases/download/v0.8.0/postgres_exporter_v0.8.0_linux-amd64.tar.gz'
+    dest: '/opt/prometheus/archives/postgres_exporter_v0.8.0_linux-amd64.tar.gz'
+    checksum: 'sha256:272ed14d3c360579d6e231db34a568ec08f61d2e163cf111e713929ffb6db3f5'
     mode: 0644
 
 - name: Prometheus | PostgreSQL Exporter | Extract the release
   unarchive:
     remote_src: yes
     dest: '/opt/prometheus/bin'
-    src: '/opt/prometheus/archives/postgres_exporter_v0.4.1_linux-amd64.tar.gz'
+    src: '/opt/prometheus/archives/postgres_exporter_v0.8.0_linux-amd64.tar.gz'
 
 - name: Prometheus | PostgreSQL Exporter | Activate the current version
   file:
     path: '/opt/prometheus/bin/postgres_exporter'
-    src: '/opt/prometheus/bin/postgres_exporter_v0.4.1_linux-amd64/postgres_exporter'
+    src: '/opt/prometheus/bin/postgres_exporter_v0.8.0_linux-amd64/postgres_exporter'
     state: link
   notify:
     - Restart Prometheus PostgreSQL Exporter

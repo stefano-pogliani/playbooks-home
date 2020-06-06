@@ -1,10 +1,29 @@
 ---
 - name: Prometheus | MongoDB Exporter | Fetch the release
   get_url:
-    url: 'https://github.com/dcu/mongodb_exporter/releases/download/v1.0.0/mongodb_exporter-linux-amd64'
-    dest: '/opt/prometheus/bin/mongodb_exporter'
-    checksum: 'sha256:153537eed1e59da63d036228d159c2b26bb474d4241bb95bca16ec288aa98d4c'
-    mode: 0755
+    url: 'https://github.com/percona/mongodb_exporter/releases/download/v0.11.0/mongodb_exporter-0.11.0.linux-amd64.tar.gz'
+    dest: '/opt/prometheus/archives/mongodb_exporter-0.11.0.tar.gz'
+    checksum: 'sha256:e0be8af72dd89a9637cbeedfa637694607209edbca4dafcdb11e22bcda270b6e'
+    mode: 0644
+  notify:
+    - Restart Prometheus MongoDB Exporter
+
+- name: Prometheus | MongoDB Exporter | Extracted release location
+  file:
+    path: '/opt/prometheus/bin/mongodb_exporter-0.11.0'
+    state: directory
+
+- name: Prometheus | MongoDB Exporter | Extract the release
+  unarchive:
+    remote_src: yes
+    dest: '/opt/prometheus/bin/mongodb_exporter-0.11.0'
+    src: '/opt/prometheus/archives/mongodb_exporter-0.11.0.tar.gz'
+
+- name: Prometheus | MongoDB Exporter | Activate the current version
+  file:
+    path: '/opt/prometheus/bin/mongodb_exporter'
+    src: '/opt/prometheus/bin/mongodb_exporter-0.11.0/mongodb_exporter'
+    state: link
   notify:
     - Restart Prometheus MongoDB Exporter
 
