@@ -1,4 +1,4 @@
-# Ansible Playbooks for a Home Network
+# Ansible Playbooks for a Home Server
 A personal home server running a personal home cloud.
 Ansible tasks and playbooks for configuration.
 
@@ -24,24 +24,19 @@ ansible-playbook --ask-become-pass \
 find . -name '*.retry' -print -delete
 ```
 
+### Run all playbooks
+This repo contains multiple playbooks responsible for different tasks.
+To apply them all you can run `playbooks/all.yml`, which runs them in order.
+
 
 ## Secrets
 Secrets are stored in Ansible Vaults.
 The master password was generated as below and is git ignored.
 
-The following is a list of vaults:
-
-  * `authgateway`: secrets used to configure AuthGateway.
-  * `grafana`: secrets used to configure Grafana.
-
+To generate new random secrets:
 ```bash
-openssl rand -base64 4096 | tr -d '\n' > .authgateway.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .backups-key.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .backups.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .email.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .firefly-iii.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .grafana.vaultsecret
-openssl rand -base64 4096 | tr -d '\n' > .me.vaultsecret
+# Generate an ansible vault secret.
+openssl rand -base64 4096 | tr -d '\n' > .$NAME.vaultsecret
 
 # Generate random secrets.
 openssl rand -base64 48
@@ -84,6 +79,8 @@ To change the OS version for the test VM:
   3. Recreate the VM and test the playbooks.
 
 
-## Run all playbooks
-This repo contains multiple playbooks responsible for different tasks.
-To apply them all you can run `playbooks/all.yml`, which runs them in order.
+## Interesting software
+
+  * Password Managers:
+    * https://www.passbolt.com/
+    * https://bitwarden.com/

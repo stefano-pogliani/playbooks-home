@@ -6,9 +6,9 @@ upstream_nginx_set_capabilities: true
 
 # Install latest release (role is not always up to date).
 authgateway_install_url: 'https://github.com/stefano-pogliani/auth-gateway/archive/v0.4.6.tar.gz'
-authgateway_oauth2_proxy_checksum: 'sha256:8aa23a0635fe9ee5406e1cbef1fb86de44c660ff2269e05a04294989121c2408'
-authgateway_oauth2_proxy_release: 'https://github.com/pusher/oauth2_proxy/releases/download/v5.0.0'
-authgateway_oauth2_proxy_version: 'oauth2_proxy-v5.0.0.linux-amd64.go1.13.6'
+authgateway_oauth2_proxy_checksum: 'sha256:5cbcec177b069b588bb6bd212a4e2a901c49a8a359590cbe669c74c267aa2e89'
+authgateway_oauth2_proxy_release: 'https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v5.1.1'
+authgateway_oauth2_proxy_version: 'oauth2_proxy-v5.1.1.linux-amd64.go1.14.2'
 
 
 # AuthGateway configuration for the host.
@@ -16,10 +16,8 @@ authgateway_configure_oauth2_proxy: true
 authgateway_conf_auditor_provider: 'http'
 authgateway_conf_auditor_endpoint: 'http://localhost:8092/audit'
 
-authgateway_acmetool_hook: '/usr/libexec/acme/hooks/authgateway'
-authgateway_acmetool_target: '/var/lib/acme/desired/authgateway'
-authgateway_conf_crt_file: '/var/lib/acme/live/home.spogliani.net/fullchain'
-authgateway_conf_key_file: '/opt/authgateway/privkey'
+authgateway_conf_crt_file: '/opt/authgateway/certs/fullchain.pem'
+authgateway_conf_key_file: '/opt/authgateway/certs/privkey.pem'
 
 authgateway_conf_domain: 'home.spogliani.net'
 authgateway_conf_provider: 'github'

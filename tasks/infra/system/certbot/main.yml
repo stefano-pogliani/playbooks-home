@@ -1,0 +1,25 @@
+---
+- name: CertBot | Install packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - 'certbot'
+    - 'python3-certbot-dns-route53'
+
+- name: CertBot | AWS confiuration directory
+  file:
+    path: '/root/.aws'
+    state: directory
+
+- name: CertBot | Confiure AWS credentials
+  template:
+    dest: '/root/.aws/config'
+    mode: 0644
+    src:  'aws.config'
+
+- name: CertBot | Enable renewal timer
+  service:
+    enabled: yes
+    name: certbot-renew.timer
+    state: started

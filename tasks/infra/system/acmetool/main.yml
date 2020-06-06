@@ -1,9 +1,0 @@
----
-- name: AcmeTool | Install
-  import_tasks: 'install.yml'
-
-- name: AcmeTool | Configure
-  import_tasks: 'config.yml'
-
-- name: AcmeTool | Service
-  import_tasks: 'service.yml'

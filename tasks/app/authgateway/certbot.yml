@@ -1,0 +1,43 @@
+---
+- name: AuthGateway | CertBot | Check certificates
+  stat:
+    path: '/etc/letsencrypt/live/home.spogliani.net'
+  register: authgateway_check_certs
+
+- name: AuthGateway | CertBot | Require certificates
+  fail:
+    msg: 'Certbot certificates for AuthGateway not found, check the docs'
+  when: not authgateway_check_certs.stat.exists
+
+# These tasks need to run before the authgateway service starts
+# but after the authgateway user is created.
+# Since ansible does not let us add custom tasks in the middles of a role
+# we use when clauses to define these tasks before the role but only run
+# them if the authgateway user exists.
+# It means the playbook will fail the first time it is run on a new system
+# but for a home server that is fine.
+- name: AuthGateway | CertBot | Check user
+  changed_when: false
+  check_mode: false
+  ignore_errors: true
+  register: authgateway_check_user
+  command: 'grep authgateway -q /etc/passwd'
+
+- name: AuthGateway | CertBot | Certificates path
+  file:
+    path: '/opt/authgateway/certs'
+    state: directory
+  when: 'authgateway_check_user.rc == 0'
+
+- name: AuthGateway | CertBot | Render deploy hook
+  template:
+    dest: '/opt/authgateway/certs/deploy.sh'
+    mode: 0755
+    src:  'certs-hook.sh'
+  when: 'authgateway_check_user.rc == 0'
+
+- name: AuthGateway | CertBot | Deploy initial certificates
+  command:
+    cmd: '/opt/authgateway/certs/deploy.sh'
+    creates: '/opt/authgateway/certs/privkey.pem'
+  when: 'authgateway_check_user.rc == 0'
